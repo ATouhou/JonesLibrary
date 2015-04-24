@@ -66,18 +66,18 @@ a:active {
     color: #5a5651;
  }
  #logo-img{
-   height: 75px;
+   height: 70px;
    position: fixed;
    left: 130px;
-   top: 20px;
+   top: 25px;
    z-index: 102;
  }
  #brand-name{
    position: absolute;
    z-index: 101;
-   height: 75px;
+   height: 70px;
    left: 130px;
-   top: 20px;
+   top: 25px;
    display: block;
    color: #000;
    font-size: 1.5em;
