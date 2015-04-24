@@ -19,12 +19,12 @@
  
  a:link {
     text-decoration: none;
-    color: #000;
+    color: #5a5651;
 }
 
 a:visited {
     text-decoration: none;
-    color: #000;
+    color: #5a5651;
 }
 
 a:hover {
@@ -34,7 +34,7 @@ a:hover {
 
 a:active {
     text-decoration: none;
-    color: #000;
+    color: #5a5651;
 }
  /*////////////////////////////////////////////////////
  //////////////////  Navigation ///////////////////////
@@ -45,7 +45,7 @@ a:active {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 30px;
+    margin-top: 75px;
     position: absolute;
     background-color: #fff;
     z-index: 100;
@@ -63,17 +63,21 @@ a:active {
     padding-left: 45px;
     padding-right: 45px;
     font-family: 'Carme', sans-serif;
-    color: #000;
+    color: #5a5651;
  }
  #logo-img{
    height: 75px;
    position: fixed;
    left: 150px;
-   top: 30px;
-   z-index: 101;
+   top: 20px;
+   z-index: 102;
  }
- .brand-name{
-   text-align: center;
+ #brand-name{
+   position: absolute;
+   z-index: 101;
+   height: 75px;
+   left: 150px;
+   top: 20px;
    display: block;
    color: #000;
    font-size: 1.5em;
