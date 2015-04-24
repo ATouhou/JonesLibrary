@@ -1,5 +1,6 @@
-<!doctype html>
-
+<?php
+//INDEX FILE
+?>
 <HTML lang="en">
     
     <HEAD>
@@ -49,12 +50,7 @@
                 </LI>
             </UL>
         </DIV>
-        
-        <!--CONTENT-->
-        <DIV class='index-content'>
             
-        </DIV>
-        
     </BODY>
     
 </HTML>
