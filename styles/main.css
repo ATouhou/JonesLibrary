@@ -1,0 +1,93 @@
+/*////////////////////////////////////////////////////
+ //////////////////  General ////////////////////////
+ //////////////////////////////////////////////////*/
+ 
+ body{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    background-color: #fff;
+    font-family: 'Carme', sans-serif;
+    color: #000;
+ }
+ 
+ ul{
+    list-style: none;
+ }
+ 
+ a:link {
+    text-decoration: none;
+    color: #000;
+}
+
+a:visited {
+    text-decoration: none;
+    color: #000;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #e6e6e6;
+}
+
+a:active {
+    text-decoration: none;
+    color: #000;
+}
+ /*////////////////////////////////////////////////////
+ //////////////////  Navigation ///////////////////////
+ ///////////////////////////////////////////////////*/
+ 
+ .nav-whole{
+    width: 100%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    position: absolute;
+    background-color: #fff;
+    z-index: 100;
+ }
+ .nav-ul{
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+ }
+ .nav-li{
+    text-align: center;
+    display: inline;
+    padding-left: 45px;
+    padding-right: 45px;
+    font-family: 'Carme', sans-serif;
+    color: #000;
+ }
+ #logo-img{
+   height: 75px;
+   position: fixed;
+   left: 150px;
+   top: 30px;
+   z-index: 101;
+ }
+ .brand-name{
+   text-align: center;
+   display: block;
+   color: #000;
+   font-size: 1.5em;
+   margin-bottom: 20px;
+   font-family: 'Carme', sans-serif;
+ }
+   /*///////////////////////////////////////////////////
+ ////////////////////  Contact  ///////////////////////
+ ///////////////////////////////////////////////////*/
+ 
+  /*///////////////////////////////////////////////////
+ //////////////////  Social Media /////////////////////
+ ///////////////////////////////////////////////////*/
+ 
+   /*///////////////////////////////////////////////////
+ /////////////////////  Footer  ///////////////////////
+ ///////////////////////////////////////////////////*/
