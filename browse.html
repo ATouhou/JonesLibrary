@@ -13,7 +13,10 @@
         <LINK href='http://fonts.googleapis.com/css?family=Carme' rel='stylesheet' type='text/css'>
             
         <!--SCRIPT-->
-        
+        <SCRIPT src="script/jquery.js"></SCRIPT>
+        <SCRIPT src="script/jquery-ui.js"></SCRIPT>
+        <SCRIPT src="script/bootstrap.js"></SCRIPT>
+        <SCRIPT src="script/modal.js"></SCRIPT>
         
         <!--FAVICON-->
         <LINK rel="icon" type="image/png" href="images/favicon.png">
@@ -57,6 +60,168 @@
                     </LI>
                 </UL>
             </DIV>
+            
+            <style>
+                .modal{
+                    position: fixed;
+                    z-index: 1050;
+                    text-align: center;
+                    bottom: 0;
+                    top: 0;
+                    right: 0;
+                    left: 0;
+                    overflow: hidden;
+                    background-color: rgba(0,0,0,0.5);
+                }
+                .modal-dialog{
+                    margin: auto;
+                    position: relative;
+                    margin: 10px;
+                    transform: translate(0,0);
+                }
+                .modal-content{
+                    margin: 10% 30% 30% 30%; /* top, right bottom left*/
+                    text-align: center;
+                    background-color: #fff;
+                    border-radius: 6px;
+                    outline: 0;
+                    border: 1px solid rgba(0,0,0,.2);
+                    position: relative;
+                    padding-left: 30px;
+                    padding-right: 30px;
+                }
+                .modal-header{
+                    border-bottom: 1px solid #e5e5e5;
+                    margin-bottom: 30px;
+                }
+                .modal-footer{
+                    border-top: 1px solid #e5e5e5;
+                    margin-top: 30px;
+                }
+                .modal-footer>button{
+                    margin: 30px 0px 30px 0px;
+                    cursor: pointer;
+                }
+                .close{
+                    border: 0px;
+                    background-color: #fff;
+                    cursor: pointer;
+                    float: right;
+                }
+                .close:hover{
+                    color: #e6e6e6;
+                }
+                .modal-add-table{
+                    margin: 0px auto 0px auto;
+                    width: 70%;
+                }
+                .btn-primary{
+                    color: #fff;
+                    background-color: #4787BE;
+                    border-color: #2e6da4;
+                }
+                .btn-default{
+                    color: #333;
+                    background-color: #fff;
+                    border-color: #f4f4f4;
+                    border: 1px;
+                }
+                .btn-default:hover{
+                    background-color: #f4f4f4;
+                    border-color: #cfcfcf;
+                }
+                .btn-primary:hover{
+                    background-color: #2e6da4;
+                    border-color: #296294;
+                }
+                .btn{
+                    display: inline-block;
+                    padding: 6px 12px;
+                    margin-bottom: 0;
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 1.42857143;
+                    text-align: center;
+                    white-space: nowrap;
+                    vertical-align: middle;
+                    -ms-touch-action: manipulation;
+                    touch-action: manipulation;
+                    cursor: pointer;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                    background-image: none;
+                    border: 1px solid #cfcfcf;
+                    border-radius: 4px;
+                }
+            </style>
+            <script>
+		$(document).ready(function(){
+                    $('.modal').hide();
+		    
+		    $('.toggle-modal').click(function() {
+			$('.modal').toggle();
+		    });
+                    
+		});
+	    </script>
+            <!--MODAL-NEW BOOK-->
+            <DIV class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <DIV class="modal-dialog">
+                <DIV class="modal-content">
+                  <DIV class="modal-header">
+                    <BUTTON type="button" class="close toggle-modal" aria-label="Close"><SPAN aria-hidden="true" class='jl-large'>&times;</SPAN></BUTTON>
+                    <H4 class="modal-title jl-large" id="myModalLabel">New Book</H4>
+                  </DIV>
+                  <DIV class="modal-body">
+                    <TABLE class='modal-add-table'>
+                        <TR>
+                            <TD style='width:30%;' class='jl-right' nowrap>Title:</TD>
+                            <TD class='jl-left'><INPUT style='width: 100%;'></TD>
+                        </TR>
+                        <TR>
+                            <TD class='jl-right' nowrap>Author 1:</TD>
+                            <TD class='jl-left'><INPUT style='width: 100%;'></TD>
+                        </TR>
+                        <TR>
+                            <TD class='jl-right' nowrap>Author 2:</TD>
+                            <TD class='jl-left'><INPUT style='width: 100%;'></TD>
+                        </TR>
+                        <TR>
+                            <TD class='jl-right' nowrap>Author 3:</TD>
+                            <TD class='jl-left'><INPUT style='width: 100%;'></TD>
+                        </TR>
+                        <TR>
+                            <TD class='jl-right' nowrap>Genre:</TD>
+                            <TD class='jl-left'><INPUT style='width: 100%;'></TD>
+                        </TR>
+                        <TR>
+                            <TD class='jl-right' nowrap>Publisher:</TD>
+                            <TD class='jl-left'><INPUT style='width: 100%;'></TD>
+                        </TR>
+                        <TR>
+                            <TD class='jl-right' nowrap>Year Published:</TD>
+                            <TD class='jl-left'><INPUT style='width: 100%;'></TD>
+                        </TR>
+                        <TR>
+                            <TD class='jl-right' nowrap>Cover Image:</TD>
+                            <TD class='jl-left'><INPUT style='width: 100%;'></TD>
+                        </TR>
+                        <TR>
+                            <TD class='jl-right' nowrap>Notes:</TD>
+                            <TD class='jl-left'><TEXTAREA style='width: 100%;'></TEXTAREA></TD>
+                        </TR>
+                    </TABLE>
+                  </DIV>
+                  <DIV class="modal-footer">
+                    <BUTTON type="button" class="btn btn-default toggle-modal" style='padding: 3px;'>Close</BUTTON>
+                    <BUTTON type="button" class="btn btn-primary" style='padding: 3px;'>Save</BUTTON>
+                  </DIV>
+                </DIV>
+              </DIV>
+            </DIV>
+            
             <TABLE style='width: 67%; text-align: center; margin: auto; border: 0px;' class='jl-bg-gray'>
                 <TR>
                     <TD style='float: left; padding: 5px; margin-top: 10px; height: 50px; display: inline;' align=left nowrap>
@@ -66,7 +231,9 @@
                             <OPTION value="title">Title</OPTION>
                         </SELECT>
                     </TD>
-                    <TD style='height: 50px;'></TD>
+                    <TD style='height: 50px;'class='jl-right'>
+                        <button type="button" class="btn btn-primary toggle-modal" style='margin-right: 5px;'>Add New Book</button>
+                    </TD>
                 </TR>
             </TABLE>
             <TABLE style='width: 67%; text-align: center; margin: auto; border: 0px;'>
