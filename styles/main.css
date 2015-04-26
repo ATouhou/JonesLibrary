@@ -76,18 +76,18 @@ a:active {
     width: 16.6%;
  }
  #logo-img{
-   height: 60px;
+   height: 65px;
    position: fixed;
    margin-left: 2%;
    margin-top: 30px;
    z-index: 102;
  }
  #brand-name{
-   height: 60px;
+   height: 65px;
    position: absolute;
    display: inline;
    float: left;
-   left: 5.22%;
+   left: 5%;
  }
  
    /*///////////////////////////////////////////////////
@@ -135,6 +135,9 @@ a:active {
    text-align: center;
    margin: auto;
    border: 0px;
+ }
+ .browse-row:hover{
+   background-color: #fcede8;
  }
  table{
    border-spacing: 0px;
