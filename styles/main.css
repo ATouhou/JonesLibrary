@@ -48,6 +48,15 @@ a:active {
 .jl-left{
    text-align: left;
 }
+.jl-right{
+   text-align: right;
+}
+.jl-center{
+   text-align: center;
+}
+.jl-large{
+   font-size: 1.5em;
+}
 
  /*////////////////////////////////////////////////////
  //////////////////  Navigation ///////////////////////
