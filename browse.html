@@ -158,20 +158,23 @@
             </style>
             <script>
 		$(document).ready(function(){
-                    $('.modal').hide();
+                    $('.add-modal').hide();
+                    $('.info-modal').hide();
 		    
-		    $('.toggle-modal').click(function() {
-			$('.modal').toggle();
+		    $('.toggle-add-modal').click(function() {
+			$('.add-modal').toggle();
 		    });
-                    
+                    $('.toggle-info-modal').click(function() {
+			$('.info-modal').toggle();
+		    });
 		});
 	    </script>
             <!--MODAL-NEW BOOK-->
-            <DIV class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <DIV class="modal add-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
               <DIV class="modal-dialog">
                 <DIV class="modal-content">
                   <DIV class="modal-header">
-                    <BUTTON type="button" class="close toggle-modal" aria-label="Close"><SPAN aria-hidden="true" class='jl-large'>&times;</SPAN></BUTTON>
+                    <BUTTON type="button" class="close toggle-add-modal" aria-label="Close"><SPAN aria-hidden="true" class='jl-large'>&times;</SPAN></BUTTON>
                     <H4 class="modal-title jl-large" id="myModalLabel">New Book</H4>
                   </DIV>
                   <DIV class="modal-body">
@@ -215,13 +218,44 @@
                     </TABLE>
                   </DIV>
                   <DIV class="modal-footer">
-                    <BUTTON type="button" class="btn btn-default toggle-modal" style='padding: 3px;'>Close</BUTTON>
+                    <BUTTON type="button" class="btn btn-default toggle-add-modal" style='padding: 3px;'>Close</BUTTON>
                     <BUTTON type="button" class="btn btn-primary" style='padding: 3px;'>Save</BUTTON>
                   </DIV>
                 </DIV>
               </DIV>
             </DIV>
-            
+            <!--BOOK INFO-->
+            <DIV class="modal info-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <DIV class="modal-dialog">
+                <DIV class="modal-content">
+                  <DIV class="modal-header">
+                    <BUTTON type="button" class="close toggle-info-modal" aria-label="Close"><SPAN aria-hidden="true" class='jl-large'>&times;</SPAN></BUTTON>
+                    <H4 class="modal-title jl-large" id="myModalLabel">$title</H4>
+                  </DIV>
+                  <DIV class="modal-body">
+                    <div class='book-info-container' style='width: 100%; height: 100%; padding-left: 30px; padding-right: 30px; padding-bottom: 30px;'>
+                        
+                        <TABLE>
+                            <TR>
+                                <TD>
+                                    <div class='book-cover jl-left' style='padding-left: 0px; float: right;width: 150px; height: 225px; padding: 10px; background-color: gray; display: inline;'></div>
+                                </TD>
+                                <TD class='jl-top'>
+                                    <p class='jl-left jl-top' style='margin-left: 20px; margin-top: 0px;'>$title</p>
+                                    <p class='jl-left jl-top' style='margin-left: 20px;'>$author</p>
+                                    <p class='jl-left jl-top' style='margin-left: 20px;'>$publisher, $publishyear</p>
+                                    <p class='jl-left jl-top' style='margin-left: 20px;'>genre: $genre</p>
+                                    <p class='jl-left jl-top' style='margin-left: 20px;'>$status</p>
+                                    <p class='jl-left jl-top' style='margin-left: 20px;'>$reviews</p>
+                                </TD>
+                            </TR>
+                        </TABLE>
+                        
+                    </div>
+                  </DIV>
+                </DIV>
+              </DIV>
+            </DIV>
             <TABLE style='width: 67%; text-align: center; margin: auto; border: 0px;' class='jl-bg-gray'>
                 <TR>
                     <TD style='float: left; padding: 5px; margin-top: 10px; height: 50px; display: inline;' align=left nowrap>
@@ -232,7 +266,7 @@
                         </SELECT>
                     </TD>
                     <TD style='height: 50px;'class='jl-right'>
-                        <button type="button" class="btn btn-primary toggle-modal" style='margin-right: 5px;'>Add New Book</button>
+                        <button type="button" class="btn btn-primary toggle-add-modal" style='margin-right: 5px;'>Add New Book</button>
                     </TD>
                 </TR>
             </TABLE>
@@ -276,247 +310,247 @@
                     <TD style='text-align: left; width: 17%;' class='status jl-bg-dgray'><B>Status</B></TD>
                     <TD style='text-align: left; width: 19%;' class='checkedOutBy jl-bg-dgray'><B>Borrower</B></TD>
                 </TR>
-                <TR class='jl-bg-lgray browse-row'>
+                <TR class='jl-bg-lgray browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>There and Back Again</TD>
                     <TD class='jl-left' valign=top>J. R. R. Tolkien</TD>
                     <TD class='jl-left' valign=top>Checked out</TD>
                     <TD class='jl-left' valign=top>Baggins, Frodo</TD>
                 </TR>
-                <TR class='browse-row'>
+                <TR class='browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>The Doors of Perception</TD>
                     <TD class='jl-left' valign=top>Aldous Huxley</TD>
                     <TD class='jl-left' valign=top></TD>
                     <TD class='jl-left' valign=top></TD>
                 </TR>
-                <TR class='jl-bg-lgray  browse-row'>
+                <TR class='jl-bg-lgray  browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>Harry Potter and the Soceror's Stone</TD>
                     <TD class='jl-left' valign=top>J. K. Rowling</TD>
                     <TD class='jl-left' valign=top>Checked Out</TD>
                     <TD class='jl-left' valign=top>Robinson, Rebecca</TD>
                 </TR>
-                <TR class='browse-row'>
+                <TR class='browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>The Chronicles of Narnia</TD>
                     <TD class='jl-left' valign=top>C. S. Lewis</TD>
                     <TD class='jl-left' valign=top>Checked Out</TD>
                     <TD class='jl-left' valign=top></TD>
                 </TR>
-               <TR class='jl-bg-lgray browse-row'>
+               <TR class='jl-bg-lgray browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>The Oath</TD>
                     <TD class='jl-left' valign=top>Frank Peretti</TD>
                     <TD class='jl-left' valign=top></TD>
                     <TD class='jl-left' valign=top>Tzu, Sun</TD>
                 </TR>
-               <TR class='browse-row'>
+               <TR class='browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>The Meaning of Marriage</TD>
                     <TD class='jl-left' valign=top>Timothy Keller & Kathy Keller</TD>
                     <TD class='jl-left' valign=top>Checked Out</TD>
                     <TD class='jl-left' valign=top>Halverson, Haley</TD>
                 </TR>
-               <TR class='jl-bg-lgray browse-row'>
+               <TR class='jl-bg-lgray browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>Facing Your Giants</TD>
                     <TD class='jl-left' valign=top>Max Lucado</TD>
                     <TD class='jl-left' valign=top></TD>
                     <TD class='jl-left' valign=top></TD>
                 </TR>
-               <TR class='browse-row'>
+               <TR class='browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>Fahrenheit 451</TD>
                     <TD class='jl-left' valign=top>Ray Bradbury</TD>
                     <TD class='jl-left' valign=top></TD>
                     <TD class='jl-left' valign=top></TD>
                 </TR>
-               <TR class='jl-bg-lgray browse-row'>
+               <TR class='jl-bg-lgray browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>Enhet</TD>
                     <TD class='jl-left' valign=top>Topher & Haley Jones</TD>
                     <TD class='jl-left' valign=top>Checked Out</TD>
                     <TD class='jl-left' valign=top>Heacox, Noah</TD>
                 </TR>
-               <TR class='browse-row'>
+               <TR class='browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>The Doors of Perception</TD>
                     <TD class='jl-left' valign=top>Aldous Huxley</TD>
                     <TD class='jl-left' valign=top></TD>
                     <TD class='jl-left' valign=top></TD>
                 </TR>
-                <TR class='jl-bg-lgray browse-row'>
+                <TR class='jl-bg-lgray browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>Harry Potter and the Soceror's Stone</TD>
                     <TD class='jl-left' valign=top>J. K. Rowling</TD>
                     <TD class='jl-left' valign=top>Checked Out</TD>
                     <TD class='jl-left' valign=top>Robinson, Rebecca</TD>
                 </TR>
-                <TR class='browse-row'>
+                <TR class='browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>The Chronicles of Narnia</TD>
                     <TD class='jl-left' valign=top>C. S. Lewis</TD>
                     <TD class='jl-left' valign=top>Checked Out</TD>
                     <TD class='jl-left' valign=top></TD>
                 </TR>
-               <TR class='jl-bg-lgray browse-row'>
+               <TR class='jl-bg-lgray browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>The Oath</TD>
                     <TD class='jl-left' valign=top>Frank Peretti</TD>
                     <TD class='jl-left' valign=top></TD>
                     <TD class='jl-left' valign=top>Tzu, Sun</TD>
                 </TR>
-               <TR class='browse-row'>
+               <TR class='browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>The Meaning of Marriage</TD>
                     <TD class='jl-left' valign=top>Timothy Keller & Kathy Keller</TD>
                     <TD class='jl-left' valign=top>Checked Out</TD>
                     <TD class='jl-left' valign=top>Halverson, Haley</TD>
                 </TR>
-               <TR class='jl-bg-lgray browse-row'>
+               <TR class='jl-bg-lgray browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>Facing Your Giants</TD>
                     <TD class='jl-left' valign=top>Max Lucado</TD>
                     <TD class='jl-left' valign=top></TD>
                     <TD class='jl-left' valign=top></TD>
                 </TR>
-               <TR class='browse-row'>
+               <TR class='browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>Fahrenheit 451</TD>
                     <TD class='jl-left' valign=top>Ray Bradbury</TD>
                     <TD class='jl-left' valign=top></TD>
                     <TD class='jl-left' valign=top></TD>
                 </TR>
-               <TR class='jl-bg-lgray browse-row'>
+               <TR class='jl-bg-lgray browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>Enhet</TD>
                     <TD class='jl-left' valign=top>Topher & Haley Jones</TD>
                     <TD class='jl-left' valign=top>Checked Out</TD>
                     <TD class='jl-left' valign=top>Heacox, Noah</TD>
                 </TR>
-               <TR class='browse-row'>
+               <TR class='browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>The Doors of Perception</TD>
                     <TD class='jl-left' valign=top>Aldous Huxley</TD>
                     <TD class='jl-left' valign=top></TD>
                     <TD class='jl-left' valign=top></TD>
                 </TR>
-                <TR class='jl-bg-lgray browse-row'>
+                <TR class='jl-bg-lgray browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>Harry Potter and the Soceror's Stone</TD>
                     <TD class='jl-left' valign=top>J. K. Rowling</TD>
                     <TD class='jl-left' valign=top>Checked Out</TD>
                     <TD class='jl-left' valign=top>Robinson, Rebecca</TD>
                 </TR>
-                <TR class='browse-row'>
+                <TR class='browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>The Chronicles of Narnia</TD>
                     <TD class='jl-left' valign=top>C. S. Lewis</TD>
                     <TD class='jl-left' valign=top>Checked Out</TD>
                     <TD class='jl-left' valign=top></TD>
                 </TR>
-               <TR class='jl-bg-lgray browse-row'>
+               <TR class='jl-bg-lgray browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>The Oath</TD>
                     <TD class='jl-left' valign=top>Frank Peretti</TD>
                     <TD class='jl-left' valign=top></TD>
                     <TD class='jl-left' valign=top>Tzu, Sun</TD>
                 </TR>
-               <TR class='browse-row'>
+               <TR class='browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>The Meaning of Marriage</TD>
                     <TD class='jl-left' valign=top>Timothy Keller & Kathy Keller</TD>
                     <TD class='jl-left' valign=top>Checked Out</TD>
                     <TD class='jl-left' valign=top>Halverson, Haley</TD>
                 </TR>
-               <TR class='jl-bg-lgray browse-row'>
+               <TR class='jl-bg-lgray browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>Facing Your Giants</TD>
                     <TD class='jl-left' valign=top>Max Lucado</TD>
                     <TD class='jl-left' valign=top></TD>
                     <TD class='jl-left' valign=top></TD>
                 </TR>
-               <TR class='browse-row'>
+               <TR class='browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>Fahrenheit 451</TD>
                     <TD class='jl-left' valign=top>Ray Bradbury</TD>
                     <TD class='jl-left' valign=top></TD>
                     <TD class='jl-left' valign=top></TD>
                 </TR>
-               <TR class='jl-bg-lgray browse-row'>
+               <TR class='jl-bg-lgray browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>Enhet</TD>
                     <TD class='jl-left' valign=top>Topher & Haley Jones</TD>
                     <TD class='jl-left' valign=top>Checked Out</TD>
                     <TD class='jl-left' valign=top>Heacox, Noah</TD>
                 </TR>
-               <TR class='browse-row'>
+               <TR class='browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>The Doors of Perception</TD>
                     <TD class='jl-left' valign=top>Aldous Huxley</TD>
                     <TD class='jl-left' valign=top></TD>
                     <TD class='jl-left' valign=top></TD>
                 </TR>
-                <TR class='jl-bg-lgray browse-row'>
+                <TR class='jl-bg-lgray browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>Harry Potter and the Soceror's Stone</TD>
                     <TD class='jl-left' valign=top>J. K. Rowling</TD>
                     <TD class='jl-left' valign=top>Checked Out</TD>
                     <TD class='jl-left' valign=top>Robinson, Rebecca</TD>
                 </TR>
-                <TR class='browse-row'>
+                <TR class='browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>The Chronicles of Narnia</TD>
                     <TD class='jl-left' valign=top>C. S. Lewis</TD>
                     <TD class='jl-left' valign=top>Checked Out</TD>
                     <TD class='jl-left' valign=top></TD>
                 </TR>
-               <TR class='jl-bg-lgray browse-row'>
+               <TR class='jl-bg-lgray browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>The Oath</TD>
                     <TD class='jl-left' valign=top>Frank Peretti</TD>
                     <TD class='jl-left' valign=top></TD>
                     <TD class='jl-left' valign=top>Tzu, Sun</TD>
                 </TR>
-               <TR class='browse-row'>
+               <TR class='browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>The Meaning of Marriage</TD>
                     <TD class='jl-left' valign=top>Timothy Keller & Kathy Keller</TD>
                     <TD class='jl-left' valign=top>Checked Out</TD>
                     <TD class='jl-left' valign=top>Halverson, Haley</TD>
                 </TR>
-               <TR class='jl-bg-lgray browse-row'>
+               <TR class='jl-bg-lgray browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>Facing Your Giants</TD>
                     <TD class='jl-left' valign=top>Max Lucado</TD>
                     <TD class='jl-left' valign=top></TD>
                     <TD class='jl-left' valign=top></TD>
                 </TR>
-               <TR class='browse-row'>
+               <TR class='browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>Fahrenheit 451</TD>
                     <TD class='jl-left' valign=top>Ray Bradbury</TD>
                     <TD class='jl-left' valign=top></TD>
                     <TD class='jl-left' valign=top></TD>
                 </TR>
-               <TR class='jl-bg-lgray browse-row'>
+               <TR class='jl-bg-lgray browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>Enhet</TD>
                     <TD class='jl-left' valign=top>Topher & Haley Jones</TD>
                     <TD class='jl-left' valign=top>Checked Out</TD>
                     <TD class='jl-left' valign=top>Heacox, Noah</TD>
                 </TR>
-               <TR class='browse-row'>
+               <TR class='browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>The Doors of Perception</TD>
                     <TD class='jl-left' valign=top>Aldous Huxley</TD>
                     <TD class='jl-left' valign=top></TD>
                     <TD class='jl-left' valign=top></TD>
                 </TR>
-                <TR class='jl-bg-lgray browse-row'>
+                <TR class='jl-bg-lgray browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>Harry Potter and the Soceror's Stone</TD>
                     <TD class='jl-left' valign=top>J. K. Rowling</TD>
                     <TD class='jl-left' valign=top>Checked Out</TD>
                     <TD class='jl-left' valign=top>Robinson, Rebecca</TD>
                 </TR>
-                <TR class='browse-row'>
+                <TR class='browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>The Chronicles of Narnia</TD>
                     <TD class='jl-left' valign=top>C. S. Lewis</TD>
                     <TD class='jl-left' valign=top>Checked Out</TD>
                     <TD class='jl-left' valign=top></TD>
                 </TR>
-               <TR class='jl-bg-lgray browse-row'>
+               <TR class='jl-bg-lgray browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>The Oath</TD>
                     <TD class='jl-left' valign=top>Frank Peretti</TD>
                     <TD class='jl-left' valign=top></TD>
                     <TD class='jl-left' valign=top>Tzu, Sun</TD>
                 </TR>
-               <TR class='browse-row'>
+               <TR class='browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>The Meaning of Marriage</TD>
                     <TD class='jl-left' valign=top>Timothy Keller & Kathy Keller</TD>
                     <TD class='jl-left' valign=top>Checked Out</TD>
                     <TD class='jl-left' valign=top>Halverson, Haley</TD>
                 </TR>
-               <TR class='jl-bg-lgray browse-row'>
+               <TR class='jl-bg-lgray browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>Facing Your Giants</TD>
                     <TD class='jl-left' valign=top>Max Lucado</TD>
                     <TD class='jl-left' valign=top></TD>
                     <TD class='jl-left' valign=top></TD>
                 </TR>
-               <TR class='browse-row'>
+               <TR class='browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>Fahrenheit 451</TD>
                     <TD class='jl-left' valign=top>Ray Bradbury</TD>
                     <TD class='jl-left' valign=top></TD>
                     <TD class='jl-left' valign=top></TD>
                 </TR>
-               <TR class='jl-bg-lgray browse-row'>
+               <TR class='jl-bg-lgray browse-row toggle-info-modal'>
                     <TD class='jl-left' valign=top>Enhet</TD>
                     <TD class='jl-left' valign=top>Topher & Haley Jones</TD>
                     <TD class='jl-left' valign=top>Checked Out</TD>
