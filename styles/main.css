@@ -57,7 +57,7 @@ a:active {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 30px;
+    margin-top: 20px;
     margin-bottom: 35px;
     background-color: #fff;
  }
@@ -79,7 +79,7 @@ a:active {
    height: 60px;
    position: fixed;
    margin-left: 2%;
-   margin-top: 30px;
+   margin-top: 20px;
    z-index: 102;
  }
  #brand-name{
@@ -135,6 +135,9 @@ a:active {
    text-align: center;
    margin: auto;
    border: 0px;
+ }
+ .browse-row:hover{
+   background-color: #e64a19;
  }
  table{
    border-spacing: 0px;
