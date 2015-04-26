@@ -138,6 +138,7 @@ a:active {
  }
  .browse-row:hover{
    background-color: #e64a19;
+   cursor: pointer;
  }
  table{
    border-spacing: 0px;
