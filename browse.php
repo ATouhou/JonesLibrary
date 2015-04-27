@@ -183,7 +183,7 @@ require_once("dbconnect.php");
                                 print("<p class='jl-left jl-top' style='margin-left: 20px;'>$genre</p>");
                                 print("<p class='jl-left jl-top' style='margin-left: 20px;'>$status</p>");
                                 print("<p class='jl-left jl-top' style='margin-left: 20px;'>$borrower</p>");
-                                print("<p class='jl-left jl-top' style='margin-left: 20px;'>reviews</p>");
+                                //print("<p class='jl-left jl-top' style='margin-left: 20px;'>reviews</p>");
                                 print("</TD>");
                                 print("</TR>");
                                 print("</TABLE>");
@@ -240,34 +240,36 @@ require_once("dbconnect.php");
                     <TD style='width: 3.5%' class='jl-bg-gray'><A href='#'>Z</A></TD>
                 </TR>
             </TABLE>
-            <TABLE class='browse-table'>
-                <TR style='height: 2px; background-color: #fff; width: 100%;'></TR>
-                <TR class='jl-bg-gray'>
-                    <TD style='text-align: left; width: 32%;' class='booktitle jl-bg-dgray'><B>Title</B></TD>
-                    <TD style='text-align: left; width: 32%;' class='author jl-bg-dgray'><B>Author</B></TD>
-                    <TD style='text-align: left; width: 17%;' class='status jl-bg-dgray'><B>Status</B></TD>
-                    <TD style='text-align: left; width: 19%;' class='checkedOutBy jl-bg-dgray'><B>Borrower</B></TD>
-                </TR>
-                <TR class='jl-bg-lgray browse-row toggle-info-modal'>
-                    <TD class='jl-left' valign=top>There and Back Again</TD>
-                    <TD class='jl-left' valign=top>J. R. R. Tolkien</TD>
-                    <TD class='jl-left' valign=top>Checked out</TD>
-                    <TD class='jl-left' valign=top>Baggins, Frodo</TD>
-                </TR>
-                <TR class='browse-row toggle-info-modal'>
-                    <TD class='jl-left' valign=top>The Doors of Perception</TD>
-                    <TD class='jl-left' valign=top>Aldous Huxley</TD>
-                    <TD class='jl-left' valign=top></TD>
-                    <TD class='jl-left' valign=top></TD>
-                </TR>
-                <TR class='jl-bg-lgray  browse-row toggle-info-modal'>
-                    <TD class='jl-left' valign=top>Harry Potter and the Soceror's Stone</TD>
-                    <TD class='jl-left' valign=top>J. K. Rowling</TD>
-                    <TD class='jl-left' valign=top>Checked Out</TD>
-                    <TD class='jl-left' valign=top>Robinson, Rebecca</TD>
-                </TR>
-                
-            </TABLE>
+            <?
+            print("<TABLE class='browse-table'>");
+            
+            print("<TR style='height: 2px; background-color: #fff; width: 100%;'>");
+            print("</TR>");
+            
+            print("<TR class='jl-bg-gray'> ");
+            print("<TD style='text-align: left; width: 32%;' class='booktitle jl-bg-dgray'><B>Title</B></TD>");
+            print("<TD style='text-align: left; width: 32%;' class='author jl-bg-dgray'><B>Author</B></TD>");
+            print("<TD style='text-align: left; width: 17%;' class='status jl-bg-dgray'><B>Status</B></TD>");
+            print("<TD style='text-align: left; width: 19%;' class='checkedOutBy jl-bg-dgray'><B>Borrower</B></TD>");
+            print("</TR>");
+            
+            print("<TR class='jl-bg-lgray browse-row toggle-info-modal'>");
+            print("<TD class='jl-left' valign=top>$title</TD>");
+            print("<TD class='jl-left' valign=top>$author</TD>");
+            print("<TD class='jl-left' valign=top>$status</TD>");
+            print("<TD class='jl-left' valign=top>$borrower</TD>");
+            print("</TR>");
+            
+            print("<TR class='browse-row toggle-info-modal'>");
+            print("<TD class='jl-left' valign=top>$title</TD>");
+            print("<TD class='jl-left' valign=top>$author</TD>");
+            print("<TD class='jl-left' valign=top>$status</TD>");
+            print("<TD class='jl-left' valign=top>$borrower</TD>");
+            print("</TR>");
+             
+            print("</TABLE>");
+            
+            ?>
             <!--FOOTER-->
             <DIV class='footer'>
                 <P>Web design and development by <a href='http://mandrakedesign.com'>Mandrake Design</a>.</P>
