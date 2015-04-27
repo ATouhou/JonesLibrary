@@ -1,0 +1,262 @@
+<!doctype html>
+
+<HTML lang="en">
+    
+    <HEAD>
+        <!--META TAGS-->
+        <META charset="utf-8">
+            
+        <!--CSS-->
+        <LINK rel="stylesheet" type="text/css" href="styles/main.css"/>
+        
+        <!--FONTS-->
+        <LINK href='http://fonts.googleapis.com/css?family=Carme' rel='stylesheet' type='text/css'>
+            
+        <!--SCRIPT-->
+        <SCRIPT src="script/jquery.js"></SCRIPT>
+        <SCRIPT src="script/jquery-ui.js"></SCRIPT>
+        <SCRIPT src="script/bootstrap.js"></SCRIPT>
+        <SCRIPT src="script/modal.js"></SCRIPT>
+        
+        <!--FAVICON-->
+        <LINK rel="icon" type="image/png" href="images/favicon.png">
+            
+        <!--TITLE-->
+        <TITLE>Jones Library</TITLE>
+        
+    </HEAD>
+    
+    <BODY>
+        
+        <!--LOGO-->
+        <IMG id='logo-img' src='images/logo.png'>
+        
+        <!--THIS CONTAINS NAV, PHOTO, & TEXT-->
+        <DIV class='browse-container'>
+            
+            <!--NAVIGATION--> 
+            <DIV class='nav-whole'>  
+                <UL class='nav-ul'>
+                    <LI>
+                        <IMG id='brand-name' src='images/brandName.png'>
+                    </LI>
+                    <LI class='nav-li'>
+                        <A href='index.html'>HOME</A>
+                    </LI> 
+                    <LI class='nav-li'>
+                        <A href='browse.html'>BROWSE</A>
+                    </LI>
+                    <LI class='nav-li'>
+                        <A href='tools.php'>TOOLS</A>
+                    </LI>
+                    <LI class='nav-li'>
+                        <A href='wishlist.php'>WISH LIST</A>
+                    </LI>
+                    <LI class='nav-li'>
+                        <A href='#'>CONTACT</A>
+                    </LI>
+                    <LI class='nav-li'>
+                        <A href='#'>LOGIN</A>
+                    </LI>
+                </UL>
+            </DIV>
+            
+            <style>
+                .modal{
+                    position: fixed;
+                    z-index: 1050;
+                    text-align: center;
+                    bottom: 0;
+                    top: 0;
+                    right: 0;
+                    left: 0;
+                    overflow: hidden;
+                    background-color: rgba(0,0,0,0.5);
+                }
+                .modal-dialog{
+                    margin: auto;
+                    position: relative;
+                    margin: 10px;
+                    transform: translate(0,0);
+                }
+                .modal-content{
+                    margin: 10% 30% 30% 30%; /* top, right bottom left*/
+                    text-align: center;
+                    background-color: #fff;
+                    border-radius: 6px;
+                    outline: 0;
+                    border: 1px solid rgba(0,0,0,.2);
+                    position: relative;
+                }
+                .modal-header{
+                    border-bottom: 1px solid #e5e5e5;
+                    margin-bottom: 30px;
+                }
+                .modal-footer{
+                    border-top: 1px solid #e5e5e5;
+                    margin-top: 30px;
+                }
+                .modal-footer>button{
+                    margin: 30px 0px 30px 0px;
+                    cursor: pointer;
+                }
+                .close{
+                    border: 0px;
+                    background-color: #fff;
+                    cursor: pointer;
+                    float: right;
+                    margin-right: 30px;
+                }
+                .close:hover{
+                    color: #e6e6e6;
+                    
+                }
+                .modal-add-table{
+                    margin: 0px auto 0px auto;
+                    width: 70%;
+                }
+                .btn-primary{
+                    color: #fff;
+                    background-color: #4787BE;
+                    border-color: #2e6da4;
+                }
+                .btn-default{
+                    color: #333;
+                    background-color: #fff;
+                    border-color: #f4f4f4;
+                    border: 1px;
+                }
+                .btn-default:hover{
+                    background-color: #f4f4f4;
+                    border-color: #cfcfcf;
+                }
+                .btn-primary:hover{
+                    background-color: #2e6da4;
+                    border-color: #296294;
+                }
+                .btn{
+                    display: inline-block;
+                    padding: 6px 12px;
+                    margin-bottom: 0;
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 1.42857143;
+                    text-align: center;
+                    white-space: nowrap;
+                    vertical-align: middle;
+                    -ms-touch-action: manipulation;
+                    touch-action: manipulation;
+                    cursor: pointer;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                    background-image: none;
+                    border: 1px solid #cfcfcf;
+                    border-radius: 4px;
+                }
+            </style>
+            <script>
+		$(document).ready(function(){
+                    $('.add-modal').hide();
+		    
+		    $('.toggle-add-modal').click(function() {
+			$('.add-modal').toggle();
+		    });
+                    
+		});
+	    </script>
+            <!--MODAL-NEW BOOK-->
+            <DIV class="modal add-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <DIV class="modal-dialog">
+                <DIV class="modal-content">
+                  <DIV class="modal-header">
+                    <BUTTON type="button" class="close toggle-add-modal" aria-label="Close"><SPAN aria-hidden="true" class='jl-large'>&times;</SPAN></BUTTON>
+                    <H4 class="modal-title jl-large" id="myModalLabel">Add book to wish list</H4>
+                  </DIV>
+                  <DIV class="modal-body">
+                    <TABLE class='modal-add-table'>
+                        <TR>
+                            <TD style='width:30%;' class='jl-right' nowrap>Title:</TD>
+                            <TD class='jl-left'><INPUT style='width: 100%;'></TD>
+                        </TR>
+                        <TR>
+                            <TD class='jl-right' nowrap>Author 1:</TD>
+                            <TD class='jl-left'><INPUT style='width: 100%;'></TD>
+                        </TR>
+                        <TR>
+                            <TD class='jl-right' nowrap>Author 2:</TD>
+                            <TD class='jl-left'><INPUT style='width: 100%;'></TD>
+                        </TR>
+                        <TR>
+                            <TD class='jl-right' nowrap>Author 3:</TD>
+                            <TD class='jl-left'><INPUT style='width: 100%;'></TD>
+                        </TR>
+                        <TR>
+                            <TD class='jl-right' nowrap>Notes:</TD>
+                            <TD class='jl-left'><TEXTAREA style='width: 100%;'></TEXTAREA></TD>
+                        </TR>
+                    </TABLE>
+                  </DIV>
+                  <DIV class="modal-footer">
+                    <BUTTON type="button" class="btn btn-default toggle-add-modal" style='padding: 3px;'>Close</BUTTON>
+                    <BUTTON type="button" class="btn btn-primary" style='padding: 3px;'>Save</BUTTON>
+                  </DIV>
+                </DIV>
+              </DIV>
+            </DIV>
+            
+                  
+            <TABLE style='width: 67%; text-align: center; margin: auto; border: 0px;' class='jl-bg-gray'>
+                <TR>
+                    <TD style='height: 50px;'class='jl-right'>
+                        <button type="button" class="btn btn-primary toggle-add-modal" style='margin-right: 5px;'>Add New Book</button>
+                    </TD>
+                </TR>
+            </TABLE>
+            
+            <TABLE class='browse-table'>
+                <TR style='height: 2px; background-color: #fff; width: 100%;'></TR>
+                <TR class='jl-bg-gray'>
+                    <TD style='text-align: left; width: 60%;' class='booktitle jl-bg-dgray'><B>Title</B></TD>
+                    <TD style='text-align: left; width: 40%;' class='author jl-bg-dgray'><B>Author</B></TD>
+                    
+                </TR>
+                <TR class='jl-bg-lgray browse-row toggle-info-modal'>
+                    <TD class='jl-left' valign=top>There and Back Again</TD>
+                    <TD class='jl-left' valign=top>J. R. R. Tolkien</TD>
+                </TR>
+                <TR class='browse-row toggle-info-modal'>
+                    <TD class='jl-left' valign=top>The Doors of Perception</TD>
+                    <TD class='jl-left' valign=top>Aldous Huxley</TD>
+                </TR>
+                <TR class='jl-bg-lgray  browse-row toggle-info-modal'>
+                    <TD class='jl-left' valign=top>Harry Potter and the Soceror's Stone</TD>
+                    <TD class='jl-left' valign=top>J. K. Rowling</TD>
+                </TR>
+                <TR class='browse-row toggle-info-modal'>
+                    <TD class='jl-left' valign=top>The Chronicles of Narnia</TD>
+                    <TD class='jl-left' valign=top>C. S. Lewis</TD>
+                </TR>
+               <TR class='jl-bg-lgray browse-row toggle-info-modal'>
+                    <TD class='jl-left' valign=top>The Oath</TD>
+                    <TD class='jl-left' valign=top>Frank Peretti</TD>
+                </TR>
+               <TR class='browse-row toggle-info-modal'>
+                    <TD class='jl-left' valign=top>The Meaning of Marriage</TD>
+                    <TD class='jl-left' valign=top>Timothy Keller & Kathy Keller</TD>
+                </TR>
+               <TR class='jl-bg-lgray browse-row toggle-info-modal'>
+                    <TD class='jl-left' valign=top>Facing Your Giants</TD>
+                    <TD class='jl-left' valign=top>Max Lucado</TD>
+                </TR>
+            </TABLE>
+            <!--FOOTER-->
+            <DIV class='footer' style='margin-top: 35%;'>
+                <P>Web design and development by <a href='http://mandrakedesign.com'>Mandrake Design</a>.</P>
+            </DIV>
+        </DIV>
+        
+    </BODY>
+    
+</HTML>
