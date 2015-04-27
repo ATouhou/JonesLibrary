@@ -1,4 +1,5 @@
 <?php
+//hello world
 require_once("dbconnect.php");
 
 
@@ -57,10 +58,10 @@ if(isset($_POST) && !empty($_POST) ){
                         <A href='index.php'>HOME</A>
                     </LI> 
                     <LI class='nav-li'>
-                        <A href='browse.html'>BROWSE</A>
+                        <A href='browse.php'>BROWSE</A>
                     </LI>
                     <LI class='nav-li'>
-                        <A href='tools.php'>TOOLS</A>
+                        <A href='#'>TOOLS</A>
                     </LI>
                     <LI class='nav-li'>
                         <A href='wishlist.php'>WISH LIST</A>
