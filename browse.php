@@ -1,7 +1,7 @@
 <?php
-//hello world
-require_once("dbconnect.php");
 
+require_once("dbconnect.php");
+$letter = $_GET['letter'];
 
 //if(isset($_POST) && !empty($_POST) ){
 //	//an email must be sent
@@ -153,6 +153,7 @@ require_once("dbconnect.php");
             //echo("SQL: $sql");
             $rs = mysql_query($sql);
             if($rs) $rsc = mysql_num_rows($rs);
+	    $rsc = 0;
             for($i=0; $i < $rsc; $i++){
                 $title = mysql_result($rs, $i, "Title");
                 $author = mysql_result($rs, $i, "Author");
@@ -212,8 +213,41 @@ require_once("dbconnect.php");
                 </TR>
             </TABLE>
             <TABLE style='width: 67%; text-align: center; margin: auto; border: 0px;'>
+		<?
+		$url = '/browse.php';
+		
+		
+function displayAlphabetBar($letter, $id, $target){
+        $alpha = array(All,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z);
+        if($id) $idStr = "id='$id' name='$id'";
+        else $idStr='';
+    
+
+        print("<INPUT $idStr type=hidden value='$letter'>");
+        print("<TABLE style='width:100%;'>");
+        print("<TR class='se-bg-gray' style='border-bottom:1px solid white;'>");
+
+        for($i=0; $i <= 27; $i++){
+            if($target) $onClick = "href=$target&$id=$alpha[$i]";
+            else $onClick = '';
+           
+            if($alpha[$i] == 'All') $width = 'width:11%;';
+            else $width = 'width:3%';
+
+            print("<TD style='$width' id='{$alpha[$i]}' >");
+            print("<A $onClick>$alpha[$i]</A>");
+            print("</TD>");
+        }
+
+        print("<TD style='width:11%;'></TD>");
+        print("</TR>");
+        print("</TABLE>");
+}
+displayAlphabetBar('A', 'letter', $url);
+
+		?>
                 <TR class='alphabetbar'>
-                    <TD style='width: 3.5%' class='jl-bg-gray'><A href='#'>ALL</A></TD>
+                    <TD style='width: 3.5%' class='jl-bg-gray'><A href='<? echo "$url?letter=ALL" ?>'>ALL</A></TD>
                     <TD style='width: 3.5%' class='jl-bg-gray'><A href='#'></A></TD>
                     <TD style='width: 3.5%' class='jl-bg-gray'><A href='#'>A</A></TD>
                     <TD style='width: 3.5%' class='jl-bg-gray'><A href='#'>B</A></TD>
