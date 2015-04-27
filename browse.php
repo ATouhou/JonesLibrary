@@ -146,54 +146,57 @@ require_once("dbconnect.php");
                 </DIV>
               </DIV>
             </DIV>
+            
             <!--BOOK INFO-->
-            <DIV class="modal info-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <DIV class="modal-dialog">
-                <DIV class="modal-content">
-                  <DIV class="modal-header">
-                    <BUTTON type="button" class="close toggle-info-modal" aria-label="Close"><SPAN aria-hidden="true" class='jl-large'>&times;</SPAN></BUTTON>
-                    <H4 class="modal-title jl-large" id="myModalLabel">$title</H4>
-                  </DIV>
-                  <DIV class="modal-body">
-                    <div class='book-info-container' style='width: 100%; height: 100%; padding-left: 30px; padding-right: 30px; padding-bottom: 30px;'>
-                        <?php
-                            $sql = "select * from BookInfo";
-                            //echo("SQL: $sql");
-                            $rs = mysql_query($sql);
-                            if($rs) $rsc = mysql_num_rows($rs);
-                            for($i=0; $i < $rsc; $i++){
-                                $title = mysql_result($rs, $i, "Title");
-                                $author = mysql_result($rs, $i, "Author");
-                                $publisher = mysql_result($rs, $i, "Publisher");
-                                $publishyear = mysql_result($rs, $i, "Year");
-                                $genre = mysql_result($rs, $i, "Genre");
-                                $borrower = mysql_result($rs, $i, "Borrower");
-                                $cover = mysql_result($rs, $i, "Cover");
-                                $status = mysql_result($rs, $i, "Status");
-                                
-                                print("<TABLE>");
-                                print("<TR>");
-                                print("<TD>");
-                                print("<div class='book-cover jl-left' style='padding-left: 0px; float: right;width: 150px; height: 225px; padding: 10px; background-color: gray; display: inline;'></div>");
-                                print("</TD>");
-                                print("<TD class='jl-top'>");
-                                print("<p class='jl-left jl-top' style='margin-left: 20px; margin-top: 0px;'>$title</p>");
-                                print("<p class='jl-left jl-top' style='margin-left: 20px;'>$author</p>");
-                                print("<p class='jl-left jl-top' style='margin-left: 20px;'>$publisher, $publishyear</p>");
-                                print("<p class='jl-left jl-top' style='margin-left: 20px;'>$genre</p>");
-                                print("<p class='jl-left jl-top' style='margin-left: 20px;'>$status</p>");
-                                print("<p class='jl-left jl-top' style='margin-left: 20px;'>$borrower</p>");
-                                //print("<p class='jl-left jl-top' style='margin-left: 20px;'>reviews</p>");
-                                print("</TD>");
-                                print("</TR>");
-                                print("</TABLE>");
-                            }
-                        ?>
-                    </div>
-                  </DIV>
-                </DIV>
-              </DIV>
-            </DIV>
+            <?php
+            $sql = "select * from BookInfo";
+            //echo("SQL: $sql");
+            $rs = mysql_query($sql);
+            if($rs) $rsc = mysql_num_rows($rs);
+            for($i=0; $i < $rsc; $i++){
+                $title = mysql_result($rs, $i, "Title");
+                $author = mysql_result($rs, $i, "Author");
+                $publisher = mysql_result($rs, $i, "Publisher");
+                $publishyear = mysql_result($rs, $i, "Year");
+                $genre = mysql_result($rs, $i, "Genre");
+                $borrower = mysql_result($rs, $i, "Borrower");
+                $cover = mysql_result($rs, $i, "Cover");
+                $status = mysql_result($rs, $i, "Status");
+                                    
+                print("<DIV class='modal info-modal' id='myModal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>");
+                print("<DIV class='modal-dialog'>");
+                print("<DIV class='modal-content'>");
+                print("<DIV class='modal-header'>");
+                print("<BUTTON type='button' class='close toggle-info-modal' aria-label='Close'><SPAN aria-hidden='true' class='jl-large'>&times;</SPAN></BUTTON>");
+                print("<H4 class='modal-title jl-large' id='myModalLabel'>$title</H4>");
+                print("</DIV>");
+                print("<DIV class='modal-body'>");
+                print("<div class='book-info-container' style='width: 100%; height: 100%; padding-left: 30px; padding-right: 30px; padding-bottom: 30px;'>");
+                        
+                print("<TABLE>");
+                print("<TR>");
+                print("<TD>");
+                print("<div class='book-cover jl-left' style='padding-left: 0px; float: right;width: 150px; height: 225px; padding: 10px; background-color: gray; display: inline;'></div>");
+                print("</TD>");
+                print("<TD class='jl-top'>");
+                print("<p class='jl-left jl-top' style='margin-left: 20px; margin-top: 0px;'>$title</p>");
+                print("<p class='jl-left jl-top' style='margin-left: 20px;'>$author</p>");
+                print("<p class='jl-left jl-top' style='margin-left: 20px;'>$publisher, $publishyear</p>");
+                print("<p class='jl-left jl-top' style='margin-left: 20px;'>$genre</p>");
+                print("<p class='jl-left jl-top' style='margin-left: 20px;'>$status</p>");
+                print("<p class='jl-left jl-top' style='margin-left: 20px;'>$borrower</p>");
+                //print("<p class='jl-left jl-top' style='margin-left: 20px;'>reviews</p>");
+                print("</TD>");
+                print("</TR>");
+                print("</TABLE>");
+            
+                print("</div>");
+                print("</DIV>");
+                print("</DIV>");
+                print("</DIV>");
+                print("</DIV>");  
+            }
+        ?>
             <TABLE style='width: 67%; text-align: center; margin: auto; border: 0px;' class='jl-bg-gray'>
                 <TR>
                     <TD style='float: left; padding: 5px; margin-top: 10px; height: 50px; display: inline;' align=left nowrap>
