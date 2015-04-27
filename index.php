@@ -1,5 +1,18 @@
 <?php
+require_once("dbconnect.php");
 
+
+if(isset($_POST) && !empty($_POST) ){
+	//an email must be sent
+
+	$name=$_POST['name'];
+        $sender=$_POST['email'];
+        $subject=$_POST['subject'];
+        $message=$_POST['message'];
+
+        $email="Name: " . $name . "\n". "\n" . "Email: " . $sender . "\n". "\n" . "Subject: " . $subject . "\n". "\n" . "Message: " . $message;
+        mail("cjones.wingsofgold@gmail.com", $subject, $email);
+}
 ?>
 <!doctype html>
 
