@@ -68,11 +68,11 @@ a:active {
 .btn-default{
    color: #333;
    background-color: #fff;
-   border-color: #f4f4f4;
+   border-color: #f1f1f1;
    border: 1px;
 }
 .btn-default:hover{
-   background-color: #f4f4f4;
+   background-color: #f1f1f1;
    border-color: #cfcfcf;
 }
 .btn-primary:hover{
@@ -111,6 +111,7 @@ a:active {
     margin-top: 20px;
     margin-bottom: 35px;
     background-color: #fff;
+    width: 67%;
  }
  .nav-ul{
     text-align: center;
@@ -120,8 +121,8 @@ a:active {
  .nav-li{
     text-align: center;
     display: inline;
-    padding-left: 43px;
-    padding-right: 43px;
+    padding-left: 50px;
+    padding-right: 50px;
     font-family: 'Carme', sans-serif;
     color: #5a5651;
     width: 16.6%;
@@ -129,16 +130,18 @@ a:active {
  #logo-img{
    height: 60px;
    position: fixed;
-   margin-left: 2%;
+   margin-left: 20px;
    margin-top: 20px;
    z-index: 102;
+   margin-right: 10px;
  }
  #brand-name{
    height: 60px;
    position: absolute;
+   z-index: 102;
    display: inline;
    float: left;
-   left: 5.22%;
+   left: 80px;
  }
  
     /*///////////////////////////////////////////////////
@@ -167,7 +170,7 @@ a:active {
    transform: translate(0,0);
 }
 .modal-content{
-   margin: 10% 30% 30% 30%; /* top, right bottom left*/
+   margin: 10% 35% 30% 35%; /* top, right bottom left*/
    text-align: center;
    background-color: #fff;
    border-radius: 6px;
@@ -178,6 +181,8 @@ a:active {
 .modal-header{
    border-bottom: 1px solid #e5e5e5;
    margin-bottom: 30px;
+   padding-left: 30px;
+   background-color: #fff;
 }
 .modal-footer{
    border-top: 1px solid #e5e5e5;
@@ -214,7 +219,7 @@ a:active {
    text-align: center;
    margin: auto;
  }
- #bookshelf{
+ #index-img{
    width: 100%;
    margin-bottom: 30px;
  }

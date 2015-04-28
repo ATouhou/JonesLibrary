@@ -3,18 +3,18 @@
 require_once("dbconnect.php");
 
 
-if(isset($_POST) && !empty($_POST) ){
-	//an email must be sent
-
-	$name=$_POST['name'];
-        $sender=$_POST['email'];
-        $subject=$_POST['subject'];
-        $message=$_POST['message'];
-
-        $email="Name: " . $name . "\n". "\n" . "Email: " . $sender . "\n". "\n" . "Subject: " . $subject . "\n". "\n" . "Message: " . $message;
-        mail("cjones.wingsofgold@gmail.com", $subject, $email);
-}
-?>
+//if(isset($_POST) && !empty($_POST) ){
+//	//an email must be sent
+//
+//	$name=$_POST['name'];
+//        $sender=$_POST['email'];
+//        $subject=$_POST['subject'];
+//        $message=$_POST['message'];
+//
+//        $email="Name: " . $name . "\n". "\n" . "Email: " . $sender . "\n". "\n" . "Subject: " . $subject . "\n". "\n" . "Message: " . $message;
+//        mail("cjones.wingsofgold@gmail.com", $subject, $email);
+//}
+//?>
 <!doctype html>
 
 <HTML lang="en">
@@ -60,9 +60,9 @@ if(isset($_POST) && !empty($_POST) ){
                     <LI class='nav-li'>
                         <A href='browse.php'>BROWSE</A>
                     </LI>
-                    <LI class='nav-li'>
+                    <!--<LI class='nav-li'>
                         <A href='#'>TOOLS</A>
-                    </LI>
+                    </LI>-->
                     <LI class='nav-li'>
                         <A href='wishlist.php'>WISH LIST</A>
                     </LI>
@@ -76,19 +76,24 @@ if(isset($_POST) && !empty($_POST) ){
             </DIV>
             
             <!--CONTAINS PHOTO AND INDEX PARAGRAPH-->
+	    
             <DIV class='index-content'>
-                <IMG id='bookshelf' src='images/books.jpg'>
+		
+                <IMG id='index-img' src='https://github.com/TopherJonesy/JonesLibrary/blob/master/images/woods.jpg?raw=true'>
                             
-                <P id='index-p'>"Welcome! This site is the Jones' personal library catalog. There are also going
-                to be some useful tools engineered to assist in writing projects. Feel free to look through our
-                collection and if you see something you like, check it out! If you're in need of a birthday gift
-                for us, take a look at our wish list - you might find a few ideas!" </P>
+                <P id='index-p'>"Welcome! This site is the Jones' personal library catalog. This site is a work
+		in progress and we're going to be constantly improving it. There are also going
+                to be some useful tools engineered to assist in writing projects for anyone to use.
+		Feel free to look through our collection too! If you see something you like, send us a
+		message! We'd be happy to lend you any book in our collection. If you're in need of a
+		birthday/ Christmas gift for us, take a look at our wish list - you might find a few
+		ideas!" </P>
                 <P>-Topher and Haley Jones</P>
             </DIV>
            
             <!--FOOTER-->
             <DIV class='footer'>
-                <P>Web design and development by <a href='http://mandrakedesign.com'>Mandrake Design</a>.</P>
+                <P>Photo by <A href='https://www.facebook.com/TR.fotowerks'>Tyler Roberts</A>. Web design and development by <a href='http://mandrakedesign.com'>Mandrake Design</a>.</P>
             </DIV>
             
         </DIV>
