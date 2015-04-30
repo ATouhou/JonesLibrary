@@ -399,9 +399,9 @@ displayAlphabetBar($letter, 'letter', $url);
         </DIV>
         <?php
 	}
-	///////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////
 	//////////////////// TASK FUNCTIONS ////////////////
-	/////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////
 	
 	$task = $_POST['task'];
 	if($task == ''){
@@ -423,7 +423,7 @@ displayAlphabetBar($letter, 'letter', $url);
 	    $sql ="INSERT into BookInfo ";
 	    $sql .= "(Title, Author, Publisher, Year, Cover, Genre, Notes ";
 	    $sql .= " )VALUES(";
-	    $sql .= " \"$title\", \"$author\", \"$publisher\", '$publishyear', '$cover', '$genre', \"$notes\")";
+	    $sql .= " \"$title\", \"$author\", \"$publisher\", \"$publishyear\", \"$cover\", \"$genre\", \"$notes\")";
 	    
 	    mysql_query($sql);
 	    

@@ -20,13 +20,13 @@ function displaybooks($letter, $browseby){
 <HTML lang="en">
     
     <HEAD>
-	<script type='text/javascript'>
-	    function changebrowse(x){
-		var browse = x.value;
-		location.href='browse.php?letter=<?php echo $letter ?>&browseby='+browse;
-
-	    }
+	    <script type='text/javascript'>
+	         function changebrowse(x){
+		         var browse = x.value;
+	    	     location.href='wishlist.php?letter=<?php echo $letter ?>&browseby='+browse;
+	         }
 	</script>
+
         <!--META TAGS-->
         <META charset="utf-8">
             
@@ -87,15 +87,13 @@ function displaybooks($letter, $browseby){
             </DIV>
            
             <script>
-		$(document).ready(function(){
-
-		    
+                $(document).ready(function(){
                     $('.add-modal').hide();
-                    
-		    $('.toggle-add-modal').click(function() {
-			$('.add-modal').toggle();
-		    });
-		});
+                            
+                    $('.toggle-add-modal').click(function() {
+                        $('.add-modal').toggle();
+                    });
+                });
 	    </script>
 	    
             <!--MODAL-NEW BOOK-->
@@ -148,7 +146,7 @@ function displaybooks($letter, $browseby){
             </TABLE>
            <?php
 	   
-		$url = "browse.php?browseby=$browseby";
+		$url = "wishlist.php?browseby=$browseby";
 		
 function displayAlphabetBar($letter, $id, $target){
         $alpha = array(All,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z);
