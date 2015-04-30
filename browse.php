@@ -15,18 +15,6 @@ function displaybooks($letter, $browseby){
     }else{
 	$titlestr = '';
     }
-
-//if(isset($_POST) && !empty($_POST) ){
-//	//an email must be sent
-//
-//	$name=$_POST['name'];
-//        $sender=$_POST['email'];
-//        $subject=$_POST['subject'];
-//        $message=$_POST['message'];
-//
-//        $email="Name: " . $name . "\n". "\n" . "Email: " . $sender . "\n". "\n" . "Subject: " . $subject . "\n". "\n" . "Message: " . $message;
-//        mail("cjones.wingsofgold@gmail.com", $subject, $email);
-//}
 ?>
 <!doctype html>
 
@@ -127,6 +115,10 @@ function displaybooks($letter, $browseby){
 		    
                     $('.toggle-info-modal').click(function() {
 			var bookid = $(this).closest('tr').data('id');
+            
+            $("#target_book").val(bookid);
+            $("#target_author").val(bookid);
+
 			var title = $("input[name='title_"+bookid+"']").val();
 			var author = $("input[name='author_"+bookid+"']").val();
 			var cover = $("input[name='cover_"+bookid+"']").val();
@@ -268,6 +260,8 @@ function displaybooks($letter, $browseby){
 		print("<DIV class='book-checkout-form'");
 		print("<FORM method=POST action='browse.php'>");
 		    print("<INPUT type=hidden name=task value=addborrower>");
+            print("<INPUT type=hidden name=borrowedbook id='target_book' value=''>");
+            print("<INPUT type=hidden name=borrowedauthor id='target_author' value=''>");
 		    print("<DIV>");
 	    ?>
 			<TABLE class='modal-add-table'>
@@ -282,26 +276,6 @@ function displaybooks($letter, $browseby){
 			    <TR>
 				<TD class='jl-right' nowrap>Email:</TD>
 				<TD class='jl-left'><INPUT name=email style='width: 100%;'></TD>
-			    </TR>
-			    <TR>
-				<TD class='jl-right' nowrap>Street Address:</TD>
-				<TD class='jl-left'><INPUT name=street1 style='width: 100%;'></TD>
-			    </TR>
-			    <TR>
-				<TD class='jl-right' nowrap>Apt:</TD>
-				<TD class='jl-left'><INPUT name=street2 style='width: 100%;'></TD>
-			    </TR>
-			    <TR>
-				<TD class='jl-right' nowrap>City:</TD>
-				<TD class='jl-left'><INPUT name=city style='width: 100%;'></TD>
-			    </TR>
-			    <TR>
-				<TD class='jl-right' nowrap>State:</TD>
-				<TD class='jl-left'><INPUT name=state style='width: 100%;'></TD>
-			    </TR>
-			    <TR>
-				<TD class='jl-right' nowrap>ZIP:</TD>
-				<TD class='jl-left'><INPUT name=zip style='width: 100%;'></TD>
 			    </TR>
 			</TABLE>
 		
@@ -461,24 +435,27 @@ displayAlphabetBar($letter, 'letter', $url);
 	}
 	
 	if($task == 'addborrower'){
+	    //$borrowedbook = "title_$bookid";
+	    //$borrowedauth = "author_$bookid";
+	    
 	    $bor_name = $_POST['name'];
 	    $bor_phone = $_POST['phone'];
 	    $bor_email = $_POST['email'];
-	    $bor_add1 = $_POST['address1'];
-	    $bor_add2 = $_POST['address2'];
-	    $bor_city = $_POST['city'];
-	    $bor_city = $_POST['state'];
-	    $bor_zip = $_POST['zip'];
-	    $bor_status == 1;
-	    $bor_book = 'title_$bookid';
-	    $bor_author = 'author_$bookid';
-	    error_log($bor_book);
+	    $bor_book = $_POST['borrowedbook'];
+	    $bor_author = $_POST['borrowedauthor'];
+	   // error_log($bor_book);
+	    
+	    //$id = 123;
+	    //$title_123 = "world";
+	    
+	    //$temp = "title_$id";
+	    //echo $$temp;
 	    
 	    $sql ="INSERT into Borrowers ";
-	    $sql .= "(Name, Phone, Email, Street1, Street2, City, ZIP, Status "; // ASK HOW TO INSERT TIME, BOOK, AUTHOR, //////////////////
-	    $sql .= " )VALUES(";
-	    $sql .= " \"$bor_name\", \"$bor_phone\", \"$bor_email\", '$bor_add1', '$bor_add2', '$bor_city', \"$bor_state\" ";
-	    $sql .= " \"$bor_zip\", \"$bor_status\" )";
+	    $sql .= "(Name, Phone, Email, Book, Author ";	   
+        $sql .= " )VALUES(";
+	    $sql .= " \"$bor_name\", \"$bor_phone\", \"$bor_email\", ";
+	    $sql .= " \"$bor_book\", \"$bor_author\" )";
 	    
 	    mysql_query($sql);
 	?>
