@@ -1,5 +1,4 @@
 <?php
-//hello world
 require_once("dbconnect.php");
 
 
@@ -28,6 +27,7 @@ require_once("dbconnect.php");
         
         <!--FONTS-->
         <LINK href='http://fonts.googleapis.com/css?family=Carme' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Domine:400,700' rel='stylesheet' type='text/css'>
             
         <!--SCRIPT-->
         

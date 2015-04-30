@@ -47,6 +47,7 @@ function displaybooks($letter, $browseby){
         
         <!--FONTS-->
         <LINK href='http://fonts.googleapis.com/css?family=Carme' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Domine:400,700' rel='stylesheet' type='text/css'>
             
         <!--SCRIPT-->
         <SCRIPT src="script/jquery.js"></SCRIPT>
@@ -101,44 +102,22 @@ function displaybooks($letter, $browseby){
 		$(document).ready(function(){
 		    
                     $('.add-modal').hide();
-                    $('.info-modal').hide();
-		    
+                    
 		    $('.toggle-add-modal').click(function() {
 			$('.add-modal').toggle();
 		    });
-                    $('.toggle-info-modal').click(function() {
-			var bookid = $(this).closest('tr').data('id');
-			var title = $("input[name='title_"+bookid+"']").val();
-			var author = $("input[name='author_"+bookid+"']").val();
-			var cover = $("input[name='cover_"+bookid+"']").val();
-			var publisher = $("input[name='publisher_"+bookid+"']").val();
-			var publishyear = $("input[name='publishyear_"+bookid+"']").val();
-			var genre = $("input[name='genre_"+bookid+"']").val();
-			var status = $("input[name='status_"+bookid+"']").val();
-			var borrower = $("input[name='borrower_"+bookid+"']").val();
-			
-			$('#infoborrower').html(borrower);
-			$('#infostatus').html(status);
-			$('#infogenre').html(genre);
-			$('#infopublishyear').html(publishyear);
-			$('#infopublisher').html(publisher);
-			$('#infocover').attr('src',cover);
-			$('#infotitle').html(title);
-			$('#infoModalLabel').html(title);
-			$('#infoauthor').html(author);
-			$('.info-modal').toggle();
-		    });
 		});
 	    </script>
+	    
             <!--MODAL-NEW BOOK-->
             <DIV class="modal add-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
               <DIV class="modal-dialog">
                 <DIV class="modal-content">
                   <DIV class="modal-header">
                     <BUTTON type="button" class="close toggle-add-modal" aria-label="Close"><SPAN aria-hidden="true" class='jl-large'>&times;</SPAN></BUTTON>
-                    <H4 class="modal-title jl-large" id="newModalLabel">New Book</H4>
+                    <H4 class="modal-title jl-large" id="newModalLabel">Add A Book To The Wish List</H4>
                   </DIV>
-		  <FORM method=POST action='browse.php'>
+		  <FORM method=POST action='wishlist.php'>
 		    <INPUT type=hidden name=task value=addbook>
 		    <DIV class="modal-body">
 			<TABLE class='modal-add-table'>
@@ -151,29 +130,13 @@ function displaybooks($letter, $browseby){
 				<TD class='jl-left'><INPUT name=author style='width: 100%;'></TD>
 			    </TR>
 			    <TR>
-				<TD class='jl-right' nowrap>Genre:</TD>
-				<TD class='jl-left'><INPUT name=genre style='width: 100%;'></TD>
-			    </TR>
-			    <TR>
-				<TD class='jl-right' nowrap>Publisher:</TD>
-				<TD class='jl-left'><INPUT name=publisher style='width: 100%;'></TD>
-			    </TR>
-			    <TR>
-				<TD class='jl-right' nowrap>Year Published:</TD>
-				<TD class='jl-left'><INPUT name=publishyear style='width: 100%;'></TD>
-			    </TR>
-			    <TR>
-				<TD class='jl-right' nowrap>Cover Image:</TD>
-				<TD class='jl-left'><INPUT name=cover style='width: 100%;'></TD>
-			    </TR>
-			    <TR>
-				<TD class='jl-right' nowrap>Notes:</TD>
-				<TD class='jl-left'><TEXTAREA name=notes style='width: 100%;'></TEXTAREA></TD>
+				<TD class='jl-right' nowrap>Book is for:</TD>
+				<TD class='jl-left'><INPUT name=bookfor style='width: 100%;'></TD>
 			    </TR>
 			</TABLE>
 		    </DIV>
 		    <DIV class="modal-footer">
-		      <BUTTON type="button" class="btn btn-default toggle-add-modal" style='padding: 3px;'>Close</BUTTON>
+		      <BUTTON type="button" class="btn btn-default toggle-add-modal" style='padding: 3px;'>Cancel</BUTTON>
 		      <BUTTON type="submit" class="btn btn-primary" style='padding: 3px;'>Save</BUTTON>
 		    </DIV>
 		    </FORM>
@@ -196,40 +159,6 @@ function displaybooks($letter, $browseby){
             </TABLE>
            <?php
 	   
-		print("<DIV class='modal info-modal' id='myModal' tabindex='-1' role='dialog' aria-labelledby='infoModalLabel' aria-hidden='true'>");
-                print("<DIV class='modal-dialog'>");
-                print("<DIV class='modal-content'>");
-                print("<DIV class='modal-header'>");
-                print("<BUTTON type='button' class='close toggle-info-modal' aria-label='Close'><SPAN aria-hidden='true' class='jl-large'>&times;</SPAN></BUTTON>");
-                print("<H4 class='modal-title jl-large' id='infoModalLabel'></H4>");
-                print("</DIV>");
-                print("<DIV class='modal-body'>");
-                print("<div class='book-info-container' style='height: 100%; padding-left: 30px; padding-right: 30px; padding-bottom: 30px;'>");
-                        
-                print("<TABLE>");
-                print("<TR>");
-                print("<TD>");
-                print("<img id=infocover class='book-cover jl-left' style='padding-left: 0px; float: right;width: 150px; height: 225px; background-color: #f1f1f1; display: inline;'>");
-                print("</TD>");
-                print("<TD class='jl-top'>");
-                print("<p class='jl-left jl-top' style='margin-left: 20px; margin-top: 0px;' id=infotitle></p>");
-                print("<p class='jl-left jl-top' style='margin-left: 20px;' id=infoauthor>author</p>");
-                print("<p class='jl-left jl-top' style='margin-left: 20px;' id=infopublisher>publisher</p>");
-		print("<p class='jl-left jl-top' style='margin-left: 20px;' id=infopublishyear>publishyear</p>");
-                print("<p class='jl-left jl-top' style='margin-left: 20px;' id=infogenre>genre</p>");
-                print("<p class='jl-left jl-top' style='margin-left: 20px;' id=infostatus>status</p>");
-                print("<p class='jl-left jl-top' style='margin-left: 20px;' id=infoborrower>borrower</p>");
-                //print("<p class='jl-left jl-top' style='margin-left: 20px;' id=inforeviews>reviews</p>");
-                print("</TD>");
-                print("</TR>");
-                print("</TABLE>");
-		
-		print("</div>");
-                print("</DIV>");
-                print("</DIV>");
-                print("</DIV>");
-                print("</DIV>"); 
-	  
 		$url = "browse.php?browseby=$browseby";
 		
 function displayAlphabetBar($letter, $id, $target){
@@ -264,7 +193,7 @@ displayAlphabetBar($letter, 'letter', $url);
        
             <!--BOOK INFO-->
             <?php
-            $sql = "SELECT * from BookInfo ";
+            $sql = "SELECT * from WishList ";
 	    if($letter != 'All'){
 		$sql .= "WHERE SUBSTRING($browseby, 1, 1) = '$letter' ";
 	    }
@@ -282,31 +211,20 @@ displayAlphabetBar($letter, 'letter', $url);
             print("<TR class='jl-bg-gray'> ");
             print("<TD style='text-align: left; width: 35%;' class='booktitle jl-bg-dgray'><B>Title</B></TD>");
             print("<TD style='text-align: left; width: 37%;' class='author jl-bg-dgray'><B>Author</B></TD>");
-            print("<TD style='text-align: left; width: 13%;' class='status jl-bg-dgray'><B>Status</B></TD>");
-            print("<TD style='text-align: left; width: 15%;' class='checkedOutBy jl-bg-dgray'><B>Borrower</B></TD>");
+            print("<TD style='text-align: left; width: 13%;' class='status jl-bg-dgray'><B>Book for</B></TD>");
             print("</TR>");
                          
            
             for($i=0; $i < $rsc; $i++){
                 $title = mysql_result($rs, $i, "Title");
                 $author = mysql_result($rs, $i, "Author");
-                $publisher = mysql_result($rs, $i, "Publisher");
-                $publishyear = mysql_result($rs, $i, "Year");
-                $genre = mysql_result($rs, $i, "Genre");
-                $borrower = mysql_result($rs, $i, "Borrower");
-                $cover = mysql_result($rs, $i, "Cover");
-                $status = mysql_result($rs, $i, "Status");
-		$bookid = mysql_result($rs, $i, "bookID");
+		$wishid = mysql_result($rs, $i, "WishID");
+		$bookfor = mysql_result($rs, $i, "BookFor");
 		
-		print("<INPUT type=hidden value=\"$title\" name='title_$bookid'>");
-		print("<INPUT type=hidden value=\"$author\" name='author_$bookid'>");
-		print("<INPUT type=hidden value=\"$publisher\" name='publisher_$bookid' >");
-		print("<INPUT type=hidden value=\"$publishyear\" name='publishyear_$bookid'>");
-		print("<INPUT type=hidden value=\"$genre\" name='genre_$bookid'>");
-		print("<INPUT type=hidden value=\"$borrower\" name='borrower_$bookid' >");
-		print("<INPUT type=hidden value=\"$cover\" name='cover_$bookid'>");
-		print("<INPUT type=hidden value=\"$status\" name='status_$bookid'>");
-		print("<INPUT type=hidden value=\"$bookid\" name='bookid_$bookid'>");
+		print("<INPUT type=hidden value=\"$title\" name='title_$wishid'>");
+		print("<INPUT type=hidden value=\"$author\" name='author_$wishid'>");
+		print("<INPUT type=hidden value=\"$bookid\" name='bookid_$wishid'>");
+		print("<INPUT type=hidden value=\"$bookid\" name='bookfor_$wishid'>");
 		
 		if($i%2 ==0){
                     $bgcolor = "#f1f1f1";
@@ -314,11 +232,11 @@ displayAlphabetBar($letter, 'letter', $url);
 		    $bgcolor = "#fff";
 		}
 	    
-		print("<TR data-id=$bookid style='background-color: $bgcolor;' class='browse-row toggle-info-modal'>");
+		print("<TR data-id=$wishid style='background-color: $bgcolor;' class='browse-row toggle-info-modal'>");
 		print("<TD class='jl-left' valign=top>$title</TD>");
 		print("<TD class='jl-left' valign=top>$author</TD>");
-		print("<TD class='jl-left' valign=top>$status</TD>");
-		print("<TD class='jl-left' valign=top>$borrower</TD>");
+		print("<TD class='jl-left' valign=top>$bookfor</TD>");
+
 		print("</TR>");
            
             }
@@ -347,20 +265,16 @@ displayAlphabetBar($letter, 'letter', $url);
 	if($task == 'addbook'){
 	    $title = $_POST['title'];
 	    $author = $_POST['author'];
-	    $publisher = $_POST['publisher'];
-	    $publishyear = $_POST['publishyear'];
-	    $cover = $_POST['cover'];
-	    $genre = $_POST['genre'];
-	    $notes = $_POST['notes'];
+	    $bookfor = $_POST['bookfor'];
 	    
-	    $sql ="INSERT into BookInfo ";
-	    $sql .= "(Title, Author, Publisher, Year, Cover, Genre, Notes ";
+	    $sql ="INSERT into WishList ";
+	    $sql .= "(Title, Author, BookFor ";
 	    $sql .= " )VALUES(";
-	    $sql .= " \"$title\", \"$author\", \"$publisher\", '$publishyear', '$cover', '$genre', \"$notes\")";
+	    $sql .= " \"$title\", \"$author\", \"$bookfor\")";
 	    
 	    mysql_query($sql);
 	    ?> <script type='text/javascript'>
-	    location.href='browse.php';
+	    location.href='wishlist.php';
 	</script>
 	<?php
 	}

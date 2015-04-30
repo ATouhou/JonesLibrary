@@ -1,6 +1,7 @@
 <?php
 
 require_once("dbconnect.php");
+
 function displaybooks($letter, $browseby){
     if(empty($letter)) $letter = "All";
     if(empty($browseby)) $browseby = "Title";
@@ -46,7 +47,9 @@ function displaybooks($letter, $browseby){
         <LINK rel="stylesheet" type="text/css" href="styles/main.css"/>
         
         <!--FONTS-->
-        <LINK href='http://fonts.googleapis.com/css?family=Carme' rel='stylesheet' type='text/css'>
+	<LINK href='http://fonts.googleapis.com/css?family=Carme' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Domine:400,700' rel='stylesheet' type='text/css'>
+	
             
         <!--SCRIPT-->
         <SCRIPT src="script/jquery.js"></SCRIPT>
@@ -102,10 +105,26 @@ function displaybooks($letter, $browseby){
 		    
                     $('.add-modal').hide();
                     $('.info-modal').hide();
-		    
+		    $('.book-checkout-form').hide();             
+
 		    $('.toggle-add-modal').click(function() {
 			$('.add-modal').toggle();
 		    });
+		    
+		    $('.close-info-modal').click(function() {
+			$('.book-checkout-form, .info-modal').hide();
+		    });
+		    
+		    $('.request').click(function(){
+			$('.book-checkout-form').slideToggle();
+			$('.book-request-btn').toggle();
+		    });
+		    
+		    $('.cancel-request').click(function(){
+			$('.book-checkout-form').toggle();
+			$('.book-request-btn').toggle();
+		    });
+		    
                     $('.toggle-info-modal').click(function() {
 			var bookid = $(this).closest('tr').data('id');
 			var title = $("input[name='title_"+bookid+"']").val();
@@ -117,15 +136,25 @@ function displaybooks($letter, $browseby){
 			var status = $("input[name='status_"+bookid+"']").val();
 			var borrower = $("input[name='borrower_"+bookid+"']").val();
 			
-			$('#infoborrower').html(borrower);
-			$('#infostatus').html(status);
-			$('#infogenre').html(genre);
-			$('#infopublishyear').html(publishyear);
-			$('#infopublisher').html(publisher);
+			var publishstr = '<B>Publisher:</B> '+publisher+' ('+publishyear+').';
+			
+			var checkedoutstr = "<B>Status:</B> Checked out by "+borrower;
+			var availablestr = "<B>Status:</B> Available";
+			
+			if (status == 2) {
+			    $('#infostatus').html(checkedoutstr);
+			} else if (status == 1) {
+			    $('#infostatus').html(availablestr);
+			} else {
+			     $('#infostatus').html("Status: Missing");
+			}
+			
+			$('#infogenre').html('<B>Category:</B> '+genre);
+			$('#infopublisher').html(publishstr);
 			$('#infocover').attr('src',cover);
-			$('#infotitle').html(title);
-			$('#infoModalLabel').html(title);
-			$('#infoauthor').html(author);
+			$('#infotitle').html('<B>Title:</B> '+title);
+			$('#infoModalLabel').html('<B>'+title+'</B>');
+			$('#infoauthor').html('<B>Author(s):</B> '+author);
 			$('.info-modal').toggle();
 		    });
 		});
@@ -136,7 +165,7 @@ function displaybooks($letter, $browseby){
                 <DIV class="modal-content">
                   <DIV class="modal-header">
                     <BUTTON type="button" class="close toggle-add-modal" aria-label="Close"><SPAN aria-hidden="true" class='jl-large'>&times;</SPAN></BUTTON>
-                    <H4 class="modal-title jl-large" id="newModalLabel">New Book</H4>
+                    <P style='padding-top: 24px; margin-top: 0px;' class="modal-title jl-large" id="newModalLabel">New Book</P>
                   </DIV>
 		  <FORM method=POST action='browse.php'>
 		    <INPUT type=hidden name=task value=addbook>
@@ -197,39 +226,99 @@ function displaybooks($letter, $browseby){
            <?php
 	   
 		print("<DIV class='modal info-modal' id='myModal' tabindex='-1' role='dialog' aria-labelledby='infoModalLabel' aria-hidden='true'>");
-                print("<DIV class='modal-dialog'>");
-                print("<DIV class='modal-content'>");
-                print("<DIV class='modal-header'>");
-                print("<BUTTON type='button' class='close toggle-info-modal' aria-label='Close'><SPAN aria-hidden='true' class='jl-large'>&times;</SPAN></BUTTON>");
-                print("<H4 class='modal-title jl-large' id='infoModalLabel'></H4>");
-                print("</DIV>");
-                print("<DIV class='modal-body'>");
-                print("<div class='book-info-container' style='height: 100%; padding-left: 30px; padding-right: 30px; padding-bottom: 30px;'>");
-                        
-                print("<TABLE>");
-                print("<TR>");
-                print("<TD>");
-                print("<img id=infocover class='book-cover jl-left' style='padding-left: 0px; float: right;width: 150px; height: 225px; background-color: #f1f1f1; display: inline;'>");
-                print("</TD>");
-                print("<TD class='jl-top'>");
-                print("<p class='jl-left jl-top' style='margin-left: 20px; margin-top: 0px;' id=infotitle></p>");
-                print("<p class='jl-left jl-top' style='margin-left: 20px;' id=infoauthor>author</p>");
-                print("<p class='jl-left jl-top' style='margin-left: 20px;' id=infopublisher>publisher</p>");
-		print("<p class='jl-left jl-top' style='margin-left: 20px;' id=infopublishyear>publishyear</p>");
-                print("<p class='jl-left jl-top' style='margin-left: 20px;' id=infogenre>genre</p>");
-                print("<p class='jl-left jl-top' style='margin-left: 20px;' id=infostatus>status</p>");
-                print("<p class='jl-left jl-top' style='margin-left: 20px;' id=infoborrower>borrower</p>");
-                //print("<p class='jl-left jl-top' style='margin-left: 20px;' id=inforeviews>reviews</p>");
-                print("</TD>");
-                print("</TR>");
-                print("</TABLE>");
+		print("<DIV class='modal-dialog'>");
+		print("<DIV class='modal-content'>");
+		print("<DIV class='modal-header'>");
+		//print("<BUTTON type='button' class='close toggle-info-modal' aria-label='Close'><SPAN aria-hidden='true' class='jl-large'>&times;</SPAN></BUTTON>");
+		print("<p style='padding-top: 24px; margin-top: 0px;' class='modal-title jl-large' id='infoModalLabel'></p>");
+		print("</DIV>");  //end of modal header
+		print("<DIV class='modal-body'>");
+		print("<div class='book-info-container' style='height: 100%; padding-left: 30px; padding-right: 30px;'>");
+					
+		print("<TABLE>");
+		print("<TR>");
+		print("<TD valign=top>");
+		print("<img id=infocover class='book-cover jl-left' style='padding-left: 0px; float: right;width: 150px; vertical-align: top background-color: #f1f1f1; display: inline;'>");
+		print("</TD>");
+		print("<TD class='jl-top'>");
+		print("<p class='jl-left jl-top' style='margin-left: 20px; margin-top: 0px;' id=infotitle></p>");
+		print("<p class='jl-left jl-top' style='margin-left: 20px;' id=infoauthor></p>");
+		print("<p class='jl-left jl-top' style='margin-left: 20px;' id=infopublisher></p>");
+		print("<p class='jl-left jl-top' style='margin-left: 20px;' id=infogenre></p>");
+		print("<p class='jl-left jl-top' style='margin-left: 20px;' id=infostatus></p>");
+		print("<p class='jl-left jl-top' style='margin-left: 20px;' id=infoborrower></p>");
+		print("</TD>");
+		print("</TR>");
+		print("</TABLE>");
 		
-		print("</div>");
-                print("</DIV>");
-                print("</DIV>");
-                print("</DIV>");
-                print("</DIV>"); 
-	  
+		print("<DIV class='book-request-btn' style='margin-top: 30px;'>");
+		print("<BUTTON type='button' class='btn btn-default toggle-info-modal toggle-both' style='padding: 3px;'>Close</BUTTON>");
+		print("<BUTTON type='submit' class='btn btn-primary request' style='padding: 3px;'>Request Book</BUTTON>");
+		print("</DIV>");
+		
+		print("</div>"); //end of book info container
+		print("</DIV>");  //end of modal-body
+		
+		
+		print("<DIV class='modal-footer' >");
+		
+		print("</DIV>"); // end of modal-footer
+		    
+		    
+		print("<DIV class='book-checkout-form'");
+		print("<FORM method=POST action='browse.php'>");
+		    print("<INPUT type=hidden name=task value=addborrower>");
+		    print("<DIV>");
+	    ?>
+			<TABLE class='modal-add-table'>
+			    <TR>
+				<TD style='width:30%;' class='jl-right' nowrap>Name:</TD>
+				<TD class='jl-left'><INPUT name=name style='width: 100%;'></TD>
+			    </TR>
+			    <TR>
+				<TD class='jl-right' nowrap>Phone:</TD>
+				<TD class='jl-left'><INPUT name=phone style='width: 100%;'></TD>
+			    </TR>
+			    <TR>
+				<TD class='jl-right' nowrap>Email:</TD>
+				<TD class='jl-left'><INPUT name=email style='width: 100%;'></TD>
+			    </TR>
+			    <TR>
+				<TD class='jl-right' nowrap>Street Address:</TD>
+				<TD class='jl-left'><INPUT name=street1 style='width: 100%;'></TD>
+			    </TR>
+			    <TR>
+				<TD class='jl-right' nowrap>Apt:</TD>
+				<TD class='jl-left'><INPUT name=street2 style='width: 100%;'></TD>
+			    </TR>
+			    <TR>
+				<TD class='jl-right' nowrap>City:</TD>
+				<TD class='jl-left'><INPUT name=city style='width: 100%;'></TD>
+			    </TR>
+			    <TR>
+				<TD class='jl-right' nowrap>State:</TD>
+				<TD class='jl-left'><INPUT name=state style='width: 100%;'></TD>
+			    </TR>
+			    <TR>
+				<TD class='jl-right' nowrap>ZIP:</TD>
+				<TD class='jl-left'><INPUT name=zip style='width: 100%;'></TD>
+			    </TR>
+			</TABLE>
+		
+		    </DIV>
+		    <DIV class='modal-footer>
+		      <BUTTON type='button' class='btn btn-default toggle-info-modal' style='padding: 3px;'></BUTTON>
+		      <BUTTON type='button' class='btn btn-default cancel-request' style='padding: 3px;'>Cancel</BUTTON>
+		      <BUTTON type='submit' class='btn btn-primary' style='padding: 3px;'>Submit</BUTTON>
+		    </DIV>
+		</FORM>
+		</DIV>
+				
+				
+		</DIV>
+		</DIV>
+                </DIV>
+	   <?php
 		$url = "browse.php?browseby=$browseby";
 		
 function displayAlphabetBar($letter, $id, $target){
@@ -313,7 +402,11 @@ displayAlphabetBar($letter, 'letter', $url);
 		}else{
 		    $bgcolor = "#fff";
 		}
-	    
+		if($status == 2){
+		    $status = "Checked out";
+		}else{
+		    $status = "Available";
+		}
 		print("<TR data-id=$bookid style='background-color: $bgcolor;' class='browse-row toggle-info-modal'>");
 		print("<TD class='jl-left' valign=top>$title</TD>");
 		print("<TD class='jl-left' valign=top>$author</TD>");
@@ -359,7 +452,37 @@ displayAlphabetBar($letter, 'letter', $url);
 	    $sql .= " \"$title\", \"$author\", \"$publisher\", '$publishyear', '$cover', '$genre', \"$notes\")";
 	    
 	    mysql_query($sql);
+	    
+	    
 	    ?> <script type='text/javascript'>
+	    location.href='browse.php';
+	</script>
+	<?php
+	}
+	
+	if($task == 'addborrower'){
+	    $bor_name = $_POST['name'];
+	    $bor_phone = $_POST['phone'];
+	    $bor_email = $_POST['email'];
+	    $bor_add1 = $_POST['address1'];
+	    $bor_add2 = $_POST['address2'];
+	    $bor_city = $_POST['city'];
+	    $bor_city = $_POST['state'];
+	    $bor_zip = $_POST['zip'];
+	    $bor_status == 1;
+	    $bor_book = 'title_$bookid';
+	    $bor_author = 'author_$bookid';
+	    error_log($bor_book);
+	    
+	    $sql ="INSERT into Borrowers ";
+	    $sql .= "(Name, Phone, Email, Street1, Street2, City, ZIP, Status "; // ASK HOW TO INSERT TIME, BOOK, AUTHOR, //////////////////
+	    $sql .= " )VALUES(";
+	    $sql .= " \"$bor_name\", \"$bor_phone\", \"$bor_email\", '$bor_add1', '$bor_add2', '$bor_city', \"$bor_state\" ";
+	    $sql .= " \"$bor_zip\", \"$bor_status\" )";
+	    
+	    mysql_query($sql);
+	?>
+	 <script type='text/javascript'>
 	    location.href='browse.php';
 	</script>
 	<?php
