@@ -1,6 +1,19 @@
 <?php
 
 require_once("dbconnect.php");
+
+if(isset($_POST) && !empty($_POST) ){
+    //an email must be sent
+
+    $name=$_POST['name'];
+    $sender=$_POST['email'];
+    $subject=$_POST['subject'];
+    $message=$_POST['message'];
+
+    $email="Name: " . $name . "\n". "\n" . "Email: " . $sender . "\n". "\n" . "Subject: " . $subject . "\n". "\n" . "Message: " . $message;
+    mail("cjones.wingsofgold@gmail.com", $subject, $email);
+}
+
 function displaybooks($letter, $browseby){
     if(empty($letter)) $letter = "All";
     if(empty($browseby)) $browseby = "Title";
@@ -25,7 +38,8 @@ function displaybooks($letter, $browseby){
 		         var browse = x.value;
 	    	     location.href='wishlist.php?letter=<?php echo $letter ?>&browseby='+browse;
 	         }
-	</script>
+		
+	    </script>
 
         <!--META TAGS-->
         <META charset="utf-8">
@@ -78,7 +92,7 @@ function displaybooks($letter, $browseby){
                         <A href='wishlist.php'>WISH LIST</A>
                     </LI>
                     <LI class='nav-li'>
-                        <A href='#'>CONTACT</A>
+                        <A class='toggle-contact-modal' href='#'>CONTACT</A>
                     </LI>
                     <LI class='nav-li'>
                         <A href='#'>LOGIN</A>
@@ -89,12 +103,64 @@ function displaybooks($letter, $browseby){
             <script>
                 $(document).ready(function(){
                     $('.add-modal').hide();
-                            
+                    $('.contact-modal').hide();
+		    
                     $('.toggle-add-modal').click(function() {
                         $('.add-modal').toggle();
                     });
-                });
+             
+		    $('.wish-list-row').click(function() {
+			var url = $(this).closest('tr').data('url');
+			window.open(url);
+		    });
+		    
+		   $('.toggle-contact-modal').click(function() {  
+		       $('.contact-modal').toggle();
+		   });
+	       
+		});
 	    </script>
+	    
+	    <!--CONTACT MODAL-->
+            <DIV class="modal contact-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
+              <DIV class="modal-dialog">
+                <DIV class="modal-content">
+                  <DIV class="modal-header">
+                    <P style='padding-top: 24px; margin-top: 0px;' class="modal-title jl-large" id="newModalLabel">Contact</P>
+                  </DIV>
+		  <FORM method=POST action='wishlist.php'>
+		    
+		    <DIV class="modal-body">
+			<TABLE class='modal-contact-table' style='width: 90%; margin: 0 5% 0 5%;'>
+			   
+			    <TR>
+				<!--SENDER'S NAME-->
+				<TD style='width: 75%;' class='jl-left'><INPUT type="text" name="name" id="name" placeholder="Your Name:" style='width: 100%; height: 25px; font-size: medium;'></TD>
+			    </TR>
+			    <TR>
+				<!--SENDER'S EMAIL-->
+				<TD class='jl-left'><INPUT name="email" id="email" placeholder="Email:" style='width: 100%; height: 25px; font-size: medium;'></TD>
+			    </TR>
+			    <TR>
+				<!--SUBJECT-->
+				<TD class='jl-left'><INPUT type="text" name="subject" id="subject" placeholder="Subject:" style='width: 100%; height: 25px; font-size: medium;'></TD>
+			    </TR>
+			    <TR>
+				<!--MESSAGE-->
+				<TD class='jl-left'><textarea name="message" id="message" placeholder="Message:" style='width: 100%; height: 150px; font-size: medium;'></textarea></TD>
+			    </TR>
+			    
+			</TABLE>
+		    </DIV>
+		    <DIV class="modal-footer">
+		      <BUTTON type="button" class="btn btn-default toggle-contact-modal" style='padding: 3px;'>Cancel</BUTTON>
+		      <BUTTON type="submit" class="sendMessage btn btn-primary" style='padding: 3px;'>Send</BUTTON>
+		      
+		    </DIV>
+		    </FORM>
+                </DIV>
+              </DIV>
+            </DIV>
 	    
             <!--MODAL-NEW BOOK-->
             <DIV class="modal add-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
@@ -107,7 +173,13 @@ function displaybooks($letter, $browseby){
 		  <FORM method=POST action='wishlist.php'>
 		    <INPUT type=hidden name=task value=addbook>
 		    <DIV class="modal-body">
+			
 			<TABLE class='modal-add-table'>
+			    
+			    <TR>
+				<TD class='jl-right' nowrap>Cover (URL):</TD>
+				<TD class='jl-left'><INPUT name=coverurl style='width: 100%;'></TD>
+			    </TR>
 			    <TR>
 				<TD style='width:30%;' class='jl-right' nowrap>Title:</TD>
 				<TD class='jl-left'><INPUT name=title style='width: 100%;'></TD>
@@ -116,11 +188,17 @@ function displaybooks($letter, $browseby){
 				<TD class='jl-right' nowrap>Author(s):</TD>
 				<TD class='jl-left'><INPUT name=author style='width: 100%;'></TD>
 			    </TR>
+			     <TR>
+				<TD class='jl-right' nowrap>Amazon Link:</TD>
+				<TD class='jl-left'><INPUT name=amazon style='width: 100%;'></TD>
+			    </TR>
 			    <TR>
 				<TD class='jl-right' nowrap>Book is for:</TD>
 				<TD class='jl-left'><INPUT name=bookfor style='width: 100%;'></TD>
 			    </TR>
+			    
 			</TABLE>
+			
 		    </DIV>
 		    <DIV class="modal-footer">
 		      <BUTTON type="button" class="btn btn-default toggle-add-modal" style='padding: 3px;'>Cancel</BUTTON>
@@ -195,18 +273,14 @@ displayAlphabetBar($letter, 'letter', $url);
             print("<TR style='height: 2px; background-color: #fff; width: 100%;'>");
             print("</TR>");
             
-            print("<TR class='jl-bg-gray'> ");
-            print("<TD style='text-align: left; width: 35%;' class='booktitle jl-bg-dgray'><B>Title</B></TD>");
-            print("<TD style='text-align: left; width: 37%;' class='author jl-bg-dgray'><B>Author</B></TD>");
-            print("<TD style='text-align: left; width: 13%;' class='status jl-bg-dgray'><B>Book for</B></TD>");
-            print("</TR>");
-                         
-           
+
             for($i=0; $i < $rsc; $i++){
                 $title = mysql_result($rs, $i, "Title");
                 $author = mysql_result($rs, $i, "Author");
 		$wishid = mysql_result($rs, $i, "WishID");
 		$bookfor = mysql_result($rs, $i, "BookFor");
+		$amazon = mysql_result($rs, $i, "Amazon");
+		$coverurl = mysql_result($rs, $i, "CoverURL");
 		
 		print("<INPUT type=hidden value=\"$title\" name='title_$wishid'>");
 		print("<INPUT type=hidden value=\"$author\" name='author_$wishid'>");
@@ -219,10 +293,14 @@ displayAlphabetBar($letter, 'letter', $url);
 		    $bgcolor = "#fff";
 		}
 	    
-		print("<TR data-id=$wishid style='background-color: $bgcolor;' class='browse-row toggle-info-modal'>");
-		print("<TD class='jl-left' valign=top>$title</TD>");
-		print("<TD class='jl-left' valign=top>$author</TD>");
-		print("<TD class='jl-left' valign=top>$bookfor</TD>");
+		print("<TR data-url=$amazon style='background-color: $bgcolor;' class='wish-list-row browse-row toggle-info-modal wishlists'>");
+		
+		print("<TD class='wishlist-item jl-left' valign=top><img class='wish-cover' src='$coverurl'></TD>");
+		print("<TD class='wishlist-item jl-left' valign=top style=' padding-left: 10px;'>");
+		print("<P><B>$title</B></P>");
+		print("<P><I>$author</I></P>");
+		print("</TD>");
+		print("<TD style='padding-bottom: 10px; padding-right: 10px;' class='wishlist-item jl-left' valign=bottom>Added by: $bookfor</TD>");
 
 		print("</TR>");
            
@@ -253,11 +331,13 @@ displayAlphabetBar($letter, 'letter', $url);
 	    $title = $_POST['title'];
 	    $author = $_POST['author'];
 	    $bookfor = $_POST['bookfor'];
+	    $coverurl = $_POST['coverurl'];
+	    $amazon = $_POST['amazon'];
 	    
 	    $sql ="INSERT into WishList ";
-	    $sql .= "(Title, Author, BookFor ";
+	    $sql .= "(Title, Author, BookFor, CoverURL, Amazon ";
 	    $sql .= " )VALUES(";
-	    $sql .= " \"$title\", \"$author\", \"$bookfor\")";
+	    $sql .= " \"$title\", \"$author\", \"$bookfor\", \"$coverurl\", \"$amazon\" )";
 	    
 	    mysql_query($sql);
 	    ?> <script type='text/javascript'>

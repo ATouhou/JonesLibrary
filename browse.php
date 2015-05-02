@@ -1,7 +1,28 @@
 <?php
 
+/*
+if ( ( !isset($_COOKIE['loggedin' ] )) || ( $_COOKIE['loggedin']!="31dec2013" ) ) {
+    header("Location: index.php");
+}
+===========================================
+         SET UP  PASSWORD.PHP
+===========================================*/
+
 require_once("dbconnect.php");
 
+
+if(isset($_POST) && !empty($_POST) ){
+	//an email must be sent
+	
+	$name=$_POST['name'];
+        $sender=$_POST['email'];
+        $subject=$_POST['subject'];
+        $message=$_POST['message'];
+	
+        $email="Name: " . $name . "\n". "\n" . "Email: " . $sender . "\n". "\n" . "Subject: " . $subject . "\n". "\n" . "Message: " . $message;
+        mail("cjones.wingsofgold@gmail.com", $subject, $email);
+}
+	
 function displaybooks($letter, $browseby){
     if(empty($letter)) $letter = "All";
     if(empty($browseby)) $browseby = "Title";
@@ -80,7 +101,7 @@ function displaybooks($letter, $browseby){
                         <A href='wishlist.php'>WISH LIST</A>
                     </LI>
                     <LI class='nav-li'>
-                        <A href='#'>CONTACT</A>
+                        <A class='toggle-contact-modal' href='#'>CONTACT</A>
                     </LI>
                     <LI class='nav-li'>
                         <A href='#'>LOGIN</A>
@@ -91,28 +112,41 @@ function displaybooks($letter, $browseby){
             <script>
 		$(document).ready(function(){
 		    
+	            $('.contact-modal').hide();
                     $('.add-modal').hide();
                     $('.info-modal').hide();
 		    $('.book-checkout-form').hide();             
-
-		    $('.toggle-add-modal').click(function() {
+		    
+		    //toggle the Add Modal when the Add New Book Button is clicked
+		    $('.toggle-add-modal').click(function() {  
 			$('.add-modal').toggle();
 		    });
 		    
+		    // when the Close button is clicked on the Book Info Modal, hide the
+		    // request form so it doesnt show if another book is clicked and also
+		    // toggle the info modal
 		    $('.close-info-modal').click(function() {
 			$('.book-checkout-form, .info-modal').hide();
 		    });
 		    
+		    // when the Request Book button is clicked, slide toggle the checkout form
+		    // and toggle the Request book and close button
 		    $('.request').click(function(){
 			$('.book-checkout-form').slideToggle();
 			$('.book-request-btn').toggle();
 		    });
 		    
+		    // When the cancel button is clicked on the Book Request Form, toggle both
+		    // the Form itself and toggle the buttons on the Info Modal
 		    $('.cancel-request').click(function(){
 			$('.book-checkout-form').toggle();
 			$('.book-request-btn').toggle();
 		    });
 		    
+		      $('.toggle-contact-modal').click(function() {  
+			$('.contact-modal').toggle();
+		    });
+		      
                     $('.toggle-info-modal').click(function() {
 			var bookid = $(this).closest('tr').data('id');
             
@@ -127,14 +161,13 @@ function displaybooks($letter, $browseby){
 			var genre = $("input[name='genre_"+bookid+"']").val();
 			var status = $("input[name='status_"+bookid+"']").val();
 			var borrower = $("input[name='borrower_"+bookid+"']").val();
-			
 			var publishstr = '<B>Publisher:</B> '+publisher+' ('+publishyear+').';
-			
 			var checkedoutstr = "<B>Status:</B> Checked out by "+borrower;
 			var availablestr = "<B>Status:</B> Available";
 			
 			if (status == 2) {
 			    $('#infostatus').html(checkedoutstr);
+			   // $('.request').hide();
 			} else if (status == 1) {
 			    $('#infostatus').html(availablestr);
 			} else {
@@ -151,6 +184,48 @@ function displaybooks($letter, $browseby){
 		    });
 		});
 	    </script>
+	    
+	    <!--CONTACT MODAL-->
+            <DIV class="modal contact-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
+              <DIV class="modal-dialog">
+                <DIV class="modal-content">
+                  <DIV class="modal-header">
+                    <P style='padding-top: 24px; margin-top: 0px;' class="modal-title jl-large" id="newModalLabel">Contact</P>
+                  </DIV>
+		  <FORM method=POST action='browse.php'>
+		    
+		    <DIV class="modal-body">
+			<TABLE class='modal-contact-table' style='width: 90%; margin: 0 5% 0 5%;'>
+			   
+			    <TR>
+				<!--SENDER'S NAME-->
+				<TD style='width: 75%;' class='jl-left'><INPUT type="text" name="name" id="name" placeholder="Your Name:" style='width: 100%; height: 25px; font-size: medium;'></TD>
+			    </TR>
+			    <TR>
+				<!--SENDER'S EMAIL-->
+				<TD class='jl-left'><INPUT name="email" id="email" placeholder="Email:" style='width: 100%; height: 25px; font-size: medium;'></TD>
+			    </TR>
+			    <TR>
+				<!--SUBJECT-->
+				<TD class='jl-left'><INPUT type="text" name="subject" id="subject" placeholder="Subject:" style='width: 100%; height: 25px; font-size: medium;'></TD>
+			    </TR>
+			    <TR>
+				<!--MESSAGE-->
+				<TD class='jl-left'><textarea name="message" id="message" placeholder="Message:" style='width: 100%; height: 150px; font-size: medium;'></textarea></TD>
+			    </TR>
+			    
+			</TABLE>
+		    </DIV>
+		    <DIV class="modal-footer">
+		      <BUTTON type="button" class="btn btn-default toggle-contact-modal" style='padding: 3px;'>Cancel</BUTTON>
+		      <BUTTON type="submit" class="sendMessage btn btn-primary" style='padding: 3px;'>Send</BUTTON>
+		      
+		    </DIV>
+		    </FORM>
+                </DIV>
+              </DIV>
+            </DIV>
+	    
             <!--MODAL-NEW BOOK-->
             <DIV class="modal add-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
               <DIV class="modal-dialog">
@@ -256,13 +331,12 @@ function displaybooks($letter, $browseby){
 		
 		print("</DIV>"); // end of modal-footer
 		    
-		    
-		print("<DIV class='book-checkout-form'");
+		print("<DIV class='book-checkout-form'>");
 		print("<FORM method=POST action='browse.php'>");
-		    print("<INPUT type=hidden name=task value=addborrower>");
-            print("<INPUT type=hidden name=borrowedbook id='target_book' value=''>");
-            print("<INPUT type=hidden name=borrowedauthor id='target_author' value=''>");
-		    print("<DIV>");
+		print("<INPUT type=hidden name=task value=addborrower>");
+		print("<INPUT type=hidden name=borrowedbook id='target_book' value=''>");
+		print("<INPUT type=hidden name=borrowedauthor id='target_author' value=''>");
+		print("<DIV>");
 	    ?>
 			<TABLE class='modal-add-table'>
 			    <TR>
@@ -280,8 +354,7 @@ function displaybooks($letter, $browseby){
 			</TABLE>
 		
 		    </DIV>
-		    <DIV class='modal-footer>
-		      <BUTTON type='button' class='btn btn-default toggle-info-modal' style='padding: 3px;'></BUTTON>
+		    <DIV class='modal-footer'>
 		      <BUTTON type='button' class='btn btn-default cancel-request' style='padding: 3px;'>Cancel</BUTTON>
 		      <BUTTON type='submit' class='btn btn-primary' style='padding: 3px;'>Submit</BUTTON>
 		    </DIV>
@@ -437,12 +510,12 @@ displayAlphabetBar($letter, 'letter', $url);
 	if($task == 'addborrower'){
 	    //$borrowedbook = "title_$bookid";
 	    //$borrowedauth = "author_$bookid";
-	    
-	    $bor_name = $_POST['name'];
-	    $bor_phone = $_POST['phone'];
-	    $bor_email = $_POST['email'];
-	    $bor_book = $_POST['borrowedbook'];
-	    $bor_author = $_POST['borrowedauthor'];
+	  
+	    $bor_name = mysql_real_escape_string($_POST['name']);
+	    $bor_phone = mysql_real_escape_string($_POST['phone']);
+	    $bor_email = mysql_real_escape_string($_POST['email']);
+	    $bor_book = mysql_real_escape_string($_POST['borrowedbook']);
+	    $bor_author = mysql_real_escape_string($_POST['borrowedauthor']);
 	   // error_log($bor_book);
 	    
 	    //$id = 123;
@@ -453,10 +526,10 @@ displayAlphabetBar($letter, 'letter', $url);
 	    
 	    $sql ="INSERT into Borrowers ";
 	    $sql .= "(Name, Phone, Email, Book, Author ";	   
-        $sql .= " )VALUES(";
-	    $sql .= " \"$bor_name\", \"$bor_phone\", \"$bor_email\", ";
-	    $sql .= " \"$bor_book\", \"$bor_author\" )";
-	    
+	    $sql .= " )VALUES(";
+	    $sql .= " '$bor_name', '$bor_phone', '$bor_email', ";
+	    $sql .= " '$bor_book', '$bor_author' )";
+	    error_log($sql);
 	    mysql_query($sql);
 	?>
 	 <script type='text/javascript'>

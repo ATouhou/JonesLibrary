@@ -257,8 +257,13 @@ a:active {
    border: 0px;
  }
  .browse-row:hover{
-   background-color: #FDF1ED;
+   background-color: #bfdfbf !important;
    cursor: pointer;
+ }
+ .wishlists{
+   height: 95px;
+   border-bottom: 1px solid #e5e5e5 !important;
+  
  }
  table{
    border-spacing: 0px;
@@ -269,6 +274,11 @@ td{
 .modal-add-table{
    margin: 0px auto 0px auto;
    width: 70%;
+}
+.wish-cover{
+   height: 75px;
+   margin-top: 10px;
+   margin-bottom: 10px;
 }
   /*///////////////////////////////////////////////////
  //////////////////  Social Media /////////////////////
